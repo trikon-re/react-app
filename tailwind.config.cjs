@@ -1,4 +1,3 @@
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
 	content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
@@ -6,7 +5,7 @@ module.exports = {
 		extend: {
 			colors: {
 				primary: {
-					DEFAULT: "#1a946e",
+					DEFAULT: "#1a946e", // "#",
 					light: "#a3d4c5",
 					dark: "#082c21",
 					50: "#badfd4",
@@ -20,31 +19,16 @@ module.exports = {
 					800: "#0d4a37",
 					900: "#0a3b2c",
 				},
-				// secondary: {
-				// 	DEFAULT: "#343c7b",
-				// 	light: "#5d6395",
-				// 	dark: "#242a56",
-				// 	50: "#d6d8e5",
-				// 	100: "#aeb1ca",
-				// 	200: "#9a9ebd",
-				// 	300: "#858ab0",
-				// 	400: "#7177a3",
-				// 	500: "#2f366f",
-				// 	600: "#2a3062",
-				// 	700: "#242a56",
-				// 	800: "#1f244a",
-				// 	900: "#151831",
-				// },
 				background: {
 					DEFAULT: "#E6E8F1",
 					light: "#FFFFFF",
 					dark: "#F1F5F9",
 				},
-				text:{
-					DEFAULT:"#2D3D45",
-					light:"#4A6979",
-					dark:"#414141"
-				}
+				text: {
+					DEFAULT: "#2D3D45",
+					light: "#4A6979",
+					dark: "#414141",
+				},
 			},
 		},
 		screens: {
