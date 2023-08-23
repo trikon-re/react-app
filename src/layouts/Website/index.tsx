@@ -1,17 +1,23 @@
+import useAuth from "@/hooks/useAuth";
 import React, { lazy } from "react";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet, useSearchParams } from "react-router-dom";
 
 const WebsiteHeader = lazy(() => import("./Header"));
 const WebsiteFooter = lazy(() => import("./Footer"));
 
 const WebsiteLayout: React.FC = () => {
-	return (
-		<>
-			<WebsiteHeader />
-			<Outlet />
-			<WebsiteFooter />
-		</>
-	);
+  let [searchParams] = useSearchParams();
+  const { isLoggedIn } = useAuth();
+
+  return isLoggedIn ? (
+    <Navigate to={searchParams.get("to") || "/app"} />
+  ) : (
+    <>
+      <WebsiteHeader />
+      <Outlet />
+      <WebsiteFooter />
+    </>
+  );
 };
 
 export default WebsiteLayout;
