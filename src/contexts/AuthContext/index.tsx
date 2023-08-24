@@ -13,9 +13,28 @@ const defaultValues: IAuthContext = {
   token: null,
   setToken: () => {},
   user: {
-    userId: 0,
-    name: "",
+    id: 0,
+    first_name: "",
+    last_name: "",
     username: "",
+    gender: "others",
+    display_picture: "",
+    email: "",
+    phone: "",
+    dob: "",
+    hired_date: "",
+    work_hour: "",
+    salary: 0,
+    bank: "",
+    address: "",
+    max_session: 0,
+    is_active: true,
+    verified_at: "",
+    role_id: undefined,
+    created_at: "",
+    updated_at: "",
+    deleted_at: "",
+    role: undefined,
   },
   isLoading: false,
   login: () => {},
@@ -69,6 +88,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       messageApi.success("Logged out! Please sign in again");
     }, 1000);
   }, [isValidationError]);
+
   const handleToken = (tkn: IToken, remember: boolean | false) => {
     if (!tkn) return;
     if (remember) localStorage.setItem("token", tkn);
