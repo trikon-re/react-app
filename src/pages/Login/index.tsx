@@ -24,15 +24,15 @@ const Login = () => {
   };
   return (
     <>
-      <section className="h-screen lg:p-20 bg-gradient-to-br from-[#C5F6F9]  to-[#E8EAFB] ">
-        <div className="container mx-auto h-full bg-white drop-shadow-xl flex flex-row items-center justify-between max-w-3xl rounded-md overflow-hidden">
+      <section className="h-screen md:p-20 bg-gradient-to-br from-[#C5F6F9]  to-[#E8EAFB] ">
+        <div className="container mx-auto h-full bg-white drop-shadow-xl flex md:flex-row flex-col items-center justify-between max-w-3xl rounded-md overflow-hidden">
           {/* Left column  */}
-          <div className="w-[80%] h-full bg-[#E8FFF8] flex flex-col items-center justify-between drop-shadow-xl">
+          <div className="w-[80%] h-full md:bg-[#E8FFF8] bg-none md:flex flex-col items-center justify-between drop-shadow-xl hidden">
             <div></div>
             <img src={logo} className="w-20" alt="" />
             <Typography
               className={
-                "text-center text-[10px] font-medium tracking-wider pb-10"
+                "text-center text-[10px] font-medium tracking-wider pb-10 hidden md:inline"
               }
             >
               We do believe in Creation, Not Construction
