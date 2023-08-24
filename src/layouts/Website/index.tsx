@@ -13,9 +13,9 @@ const WebsiteLayout: React.FC = () => {
     <Navigate to={searchParams.get("to") || "/app"} />
   ) : (
     <>
-      <WebsiteHeader />
+      {/* <WebsiteHeader /> */}
       <Outlet />
-      <WebsiteFooter />
+      {/* <WebsiteFooter /> */}
     </>
   );
 };
