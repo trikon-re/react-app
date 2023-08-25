@@ -17,17 +17,21 @@ const Login = () => {
     control,
   } = useForm({
     // resolver: joiResolver(loginResolver),
+    defaultValues: {
+      phone: "",
+      password: "",
+      remember: true,
+    },
   });
   const onValid = async ({ phone, password, remember }: FieldValues) => {
-    console.log(login);
     login(phone, password, remember);
   };
   return (
     <>
       <section className="h-screen md:p-20 bg-gradient-to-br from-[#C5F6F9]  to-[#E8EAFB] ">
-        <div className="container mx-auto h-full bg-white drop-shadow-xl flex md:flex-row flex-col items-center justify-between max-w-3xl rounded-md overflow-hidden">
+        <div className="container mx-auto h-full bg-white drop-shadow-xl flex md:flex-row flex-col items-center justify-between max-w-6xl rounded-md overflow-hidden">
           {/* Left column  */}
-          <div className="w-[80%] h-full md:bg-[#E8FFF8] bg-none md:flex flex-col items-center justify-between drop-shadow-xl hidden">
+          <div className="w-[70%] h-full md:bg-[#E8FFF8] bg-none md:flex flex-col items-center justify-between drop-shadow-xl hidden">
             <div></div>
             <img src={logo} className="w-20" alt="" />
             <Typography
@@ -40,10 +44,10 @@ const Login = () => {
           </div>
 
           {/* right column */}
-          <div className="h-full w-full flex flex-col items-center justify-center gap-4">
+          <div className="h-full w-full flex flex-col items-center justify-center gap-4 pb-12">
             <Typography
               className={
-                "mb-8 text-center text-2xl font-semibold tracking-widest"
+                "mb-8 text-center text-3xl font-semibold tracking-widest leading-3 text-text-dark"
               }
             >
               WELCOME
@@ -59,7 +63,7 @@ const Login = () => {
                   fieldState: { error },
                 }) => (
                   <>
-                    <Typography className="tracking-wide">
+                    <Typography className="tracking-wide text-sm font-medium text-text-light">
                       Phone Number
                     </Typography>
                     <Input
@@ -70,7 +74,7 @@ const Login = () => {
                           className="mr-1 text-xl"
                         />
                       }
-                      className="my-2"
+                      className="my-2 text-md"
                       placeholder={"Enter Phone Number"}
                       size={"large"}
                       onChange={onChange}
@@ -91,7 +95,7 @@ const Login = () => {
                   fieldState: { error },
                 }) => (
                   <>
-                    <Typography className="tracking-wide">
+                    <Typography className="tracking-wide text-sm font-medium text-text-light">
                       Password
                       {/* <ErrorSuffix error={error} size="small" /> */}
                     </Typography>
@@ -100,10 +104,10 @@ const Login = () => {
                         <Icon
                           icon="ri:lock-password-line"
                           color="#999"
-                          className="mr-1 text-xl"
+                          className="mr-1 text-lg"
                         />
                       }
-                      className="my-2"
+                      className="my-2 text-md text-text-light"
                       placeholder={"Enter Password"}
                       size="large"
                       onChange={onChange}
@@ -115,9 +119,22 @@ const Login = () => {
                   </>
                 )}
               />
+              <Controller
+                control={control}
+                name={"remember"}
+                render={({ field: { onChange, value } }) => (
+                  <Checkbox
+                    onChange={onChange}
+                    checked={value}
+                    className="text-sm font-medium text-text-light"
+                  >
+                    Remember me
+                  </Checkbox>
+                )}
+              />
 
               <Button
-                className="mt-2 uppercase bg-slate-600"
+                className="mt-2 uppercase bg-slate-600 text-sm font-semibold"
                 variant="contained"
                 fullWidth
                 size="large"
