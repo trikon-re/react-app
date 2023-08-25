@@ -4,14 +4,7 @@ import { Controller, FieldValues, useForm } from "react-hook-form";
 import { message } from "@components/antd/message";
 import handleResponse from "@/utilities/handleResponse";
 import { useUpdateUserInfo } from "@/queries/auth";
-import {
-  Input,
-  Select,
-  Typography,
-  Tooltip,
-  DatePicker,
-  Segmented,
-} from "antd";
+import { Input, Typography, Tooltip, DatePicker, Segmented } from "antd";
 // import { Icon } from "@iconify/react";
 import { Button } from "@mui/material";
 import useUser from "@/hooks/useUser";
@@ -78,9 +71,9 @@ const Personal: React.FC = () => {
   return (
     <>
       {contextHolder}
-      <div className="container max-w-sm mx-auto">
+      <div className="container max-w-sm mx-auto ">
         <form onSubmit={handleSubmit(onValid)}>
-          <Typography className="flex flex-row items-center gap-1 mt-2 my-1">
+          <Typography className="flex flex-row items-center gap-1 mt-2 my-1 text-text-dark">
             Full Name
           </Typography>
           <Input.Group compact>
@@ -126,7 +119,7 @@ const Personal: React.FC = () => {
             />
           </Input.Group>
 
-          <Typography className="flex flex-row items-center gap-1 mt-2 my-1">
+          <Typography className="flex flex-row items-center gap-1 mt-2 my-1 text-text-dark">
             Phone
           </Typography>
           <Controller
@@ -150,7 +143,7 @@ const Personal: React.FC = () => {
             )}
           />
 
-          <Typography className="flex flex-row items-center gap-1 mt-2 my-1">
+          <Typography className="flex flex-row items-center gap-1 mt-2 my-1 text-text-dark">
             Email
             <Tooltip
               title={"Please enter a valid email address"}
@@ -179,7 +172,7 @@ const Personal: React.FC = () => {
             )}
           />
 
-          <Typography className="flex flex-row items-center gap-1 mt-2 my-1">
+          <Typography className="flex flex-row items-center gap-1 mt-2 my-1 text-text-dark">
             Gender
           </Typography>
           <Controller
@@ -212,7 +205,7 @@ const Personal: React.FC = () => {
 
           <div className="flex flex-row gap-2">
             <div>
-              <Typography className="flex flex-row items-center gap-1 mt-2 my-1">
+              <Typography className="flex flex-row items-center gap-1 mt-2 my-1 text-text-dark">
                 Date of Birth
               </Typography>
               <Controller
@@ -234,7 +227,7 @@ const Personal: React.FC = () => {
               />
             </div>
             <div>
-              <Typography className="flex flex-row items-center gap-1 mt-2 my-1">
+              <Typography className="flex flex-row items-center gap-1 mt-2 my-1 text-text-dark">
                 Bank
               </Typography>
               <Controller

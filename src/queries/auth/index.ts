@@ -18,7 +18,7 @@ export const useLogin = () => {
 
 //Logout function with instance
 const logout = () => {
-  return instance.put("/auth/logout");
+  return instance.delete("/auth/signout");
 };
 export const useLogout = () => {
   return useMutation(logout);
@@ -68,7 +68,7 @@ const updatePassword = (data: {
   current_password?: string;
   new_password?: string;
 }) => {
-  return instance.put(`/autg/reset-password`, {
+  return instance.patch(`/auth/reset-password`, {
     ...data,
   });
 };
