@@ -5,12 +5,14 @@ export type ILogin = {
 };
 
 export type IUpdateUser = {
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   email: string;
+  display_picture: string;
+  gender: string;
+  dob: string;
+  bank: string;
   address: string;
-  roleID?: number;
-  isActive: boolean;
 };
 
 //Sigup Type
