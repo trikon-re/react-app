@@ -1,8 +1,16 @@
 import { useGetEmployees } from "@/queries/employees";
 import { usePaginate } from "@tam11a/react-use-hooks";
-import { Input } from "antd";
+import {
+  Button,
+  DatePicker,
+  Divider,
+  Input,
+  Menu,
+  MenuProps,
+  Select,
+} from "antd";
 import { Icon } from "@iconify/react";
-import React from "react";
+import React, { useState } from "react";
 import {
   Avatar,
   IconButton,
@@ -10,6 +18,7 @@ import {
   ListItemText,
 } from "@mui/material";
 import { IEmployees } from "./types";
+const { RangePicker } = DatePicker;
 
 function stringToColor(string: string) {
   let hash = 0;
@@ -40,6 +49,33 @@ function stringAvatar(name: string) {
   };
 }
 
+const onChange = (value: string) => {
+  console.log(`selected ${value}`);
+};
+
+const onSearch = (value: string) => {
+  console.log("search:", value);
+};
+
+const items: MenuProps["items"] = [
+  {
+    label: "Overview",
+    key: "overview",
+  },
+  {
+    label: "Roles",
+    key: "roles",
+  },
+  {
+    label: "Employees",
+    key: "employees",
+  },
+  {
+    label: "Permission",
+    key: "permission",
+  },
+];
+
 const Employees: React.FC = () => {
   const { getQueryParams } = usePaginate();
   const { data } = useGetEmployees(getQueryParams());
@@ -49,34 +85,110 @@ const Employees: React.FC = () => {
     setEmployees(data?.data?.data);
   }, [data]);
   console.log(employees);
+
+  const [current, setCurrent] = useState("employees");
+
+  const onClick: MenuProps["onClick"] = (e) => {
+    console.log("click ", e);
+    setCurrent(e.key);
+  };
+
   return (
     <>
-      <div className="text-2xl font-bold p-3">Employees</div>
-      <Input
-        className="font-semibold text-base"
-        placeholder="Search..."
-        style={{ width: 250 }}
-        prefix={
+      <div className="md:flex flex-row hidden">
+        <div className="text-2xl font-bold p-3">Employees</div>
+        <IconButton>
+          <Icon icon="ic:baseline-plus" />
+        </IconButton>
+      </div>
+      <div className="flex md:flex-row flex-col md:items-end justify-between my-5 border-b">
+        <Menu
+          onClick={onClick}
+          selectedKeys={[current]}
+          mode="horizontal"
+          items={items}
+          className="max-w-sm"
+        />
+        <RangePicker
+          bordered={false}
+          size={"large"}
+          allowClear
+          allowEmpty={[false, false]}
+        />
+      </div>
+
+      <div className="flex md:flex-row flex-col-reverse md:items-center md:justify-between">
+        <div className="flex flex-row items-center md:ml-4 mt-1">
           <Icon
-            className="text-2xl m-1.5 [&_.ant-menu-item-selected>.ant-menu-title-content]:text-text"
-            icon="mingcute:search-3-line"
+            className="text-lg text-slate-600 m-1.5 [&_.ant-menu-item-selected>.ant-menu-title-content]:text-text"
+            icon="lucide:arrow-down-up"
           />
-        }
-      />
+          <h1 className="text-md font-bold text-slate-600 underline underline-offset-4 hidden md:inline">
+            Sort by: {"  "}
+          </h1>
+
+          <Select
+            bordered={false}
+            className="w-40 text-text-dark font-semibold mt-0.5 mr-3"
+            size="large"
+            showSearch
+            placeholder="Search to Select"
+            optionFilterProp="children"
+            onChange={onChange}
+            onSearch={onSearch}
+            filterOption={(input, option) =>
+              (option?.label ?? "").toLowerCase().includes(input.toLowerCase())
+            }
+            options={[
+              {
+                value: "Newest",
+                label: "Newest",
+              },
+              {
+                value: "Last Updated",
+                label: "Last Updated",
+              },
+            ]}
+          />
+          <div className="md:flex flex-row items-center hidden">
+            <Icon
+              className="text-lg text-slate-600 m-1.5 [&_.ant-menu-item-selected>.ant-menu-title-content]:text-text "
+              icon="cil:filter"
+            />
+            <h1 className="text-md font-bold text-slate-600">Filter</h1>
+          </div>
+        </div>
+        <Input
+          className="font-semibold text-base"
+          placeholder="Search..."
+          style={{ width: 250 }}
+          prefix={
+            <Icon
+              className="text-lg m-1.5 [&_.ant-menu-item-selected>.ant-menu-title-content]:text-text"
+              icon="mingcute:search-3-line"
+            />
+          }
+        />
+      </div>
       <div>
         {employees?.map?.((s: IEmployees) => {
           return (
             <ListItemButton
-              className="bg-slate-100 rounded-lg p-4 my-4 overflow-hidden "
+              className="bg-slate-100 rounded-lg p-4 my-4 overflow-hidden items-center "
               // onClick={() => Navigate()}
             >
               <Avatar
                 variant="rounded"
                 {...stringAvatar(`${s?.first_name} ${s?.last_name}`)}
-                className="w-[100px] h-[100px] rounded-md mr-6"
+                className="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-md mr-6 mt-1"
               />
               <ListItemText
-                primary={`${s?.first_name} ${s?.last_name}`}
+                primary={
+                  <>
+                    {" "}
+                    <p className="text-lg font-medium">{`${s?.first_name} ${s?.last_name}`}</p>
+                  </>
+                }
                 secondary={
                   <>
                     <p className="text-sm font-bold">@{s?.username}</p>
@@ -91,7 +203,7 @@ const Employees: React.FC = () => {
                     ) : (
                       <p className="text-sm font-medium">No role assigned</p>
                     )}
-                    <div className="flex flex-row items-center gap-4">
+                    <div className="md:flex md:flex-row flex-col md:items-center md:gap-4 hidden">
                       <div className="flex flex-row items-center gap-1">
                         <Icon className="text-lg" icon="ph:phone-light" />
                         <p className="text-sm font-medium">+88{s?.phone}</p>
