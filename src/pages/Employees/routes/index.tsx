@@ -1,12 +1,12 @@
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import { settingsRoutes } from "./settingsRoutes";
+import { empRoutes } from "./employeeRoutes";
 import NProgressSuspense from "@components/NProgressSuspense";
 
-const SettingsRoutes: React.FC = () => {
+const RestaurantRoutes: React.FC = () => {
   return (
     <Routes>
-      {settingsRoutes?.map?.(({ path, Component }) => (
+      {empRoutes?.map?.(({ path, Component }) => (
         <Route
           key={path}
           path={path}
@@ -21,4 +21,4 @@ const SettingsRoutes: React.FC = () => {
   );
 };
 
-export default SettingsRoutes;
+export default RestaurantRoutes;

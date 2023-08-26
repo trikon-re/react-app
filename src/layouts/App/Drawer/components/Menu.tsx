@@ -191,7 +191,7 @@ const items: MenuItem[] = [
     children: [
       getItem(
         "Employees",
-        "/app/employees",
+        "/app/employee",
         <Icon icon={"radix-icons:dashboard"} />,
         [
           getItem(

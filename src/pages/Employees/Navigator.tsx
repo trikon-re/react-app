@@ -5,22 +5,22 @@ import { Icon } from "@iconify/react";
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
-import { SETTINGS_ROUTES } from "./routes/paths";
+import { EMPLOYEE_ROUTES } from "./routes/paths";
 
 const items: MenuProps["items"] = [
   {
     label: "Personal",
-    key: SETTINGS_ROUTES.PERSONAL,
+    key: EMPLOYEE_ROUTES.PERSONAL,
     icon: <Icon icon="ic:twotone-person-pin" className="text-xl" />,
   },
   {
     label: "Security",
-    key: SETTINGS_ROUTES.SECURITY,
+    key: EMPLOYEE_ROUTES.CREATE,
     icon: <Icon icon="ic:twotone-lock-person" className="text-xl" />,
   },
   {
     label: "Session",
-    key: SETTINGS_ROUTES.SESSION,
+    key: EMPLOYEE_ROUTES.SESSION,
     icon: <Icon icon="ic:twotone-lock-person" className="text-xl" />,
   },
 ];
