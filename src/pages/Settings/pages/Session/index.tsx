@@ -7,11 +7,18 @@ import React from "react";
 import { ISession } from "./types";
 import SessionCard from "./Components/SessionCard";
 import moment from "moment";
+import useUser from "@/hooks/useUser";
 export const { Panel } = Collapse;
 
 const Session: React.FC = () => {
-  const { getQueryParams } = usePaginate();
-  const { data, isLoading: sessionsLoading } = useGetSessions(getQueryParams());
+  const user = useUser();
+  const { getQueryParams } = usePaginate({
+    defaultParams: {},
+  });
+  const { data, isLoading: sessionsLoading } = useGetSessions({
+    employee: user.id,
+    ...getQueryParams(),
+  });
   const [sessions, setSessions] = React.useState<any>([]);
   React.useEffect(() => {
     if (!data) return;

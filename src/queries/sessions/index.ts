@@ -2,7 +2,9 @@ import instance from "@/services";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const getSessions = (params: any) => {
-  return instance.get(`/sessions`);
+  return instance.get(`/sessions`, {
+    params,
+  });
 };
 
 export const useGetSessions = (params: any) => {
