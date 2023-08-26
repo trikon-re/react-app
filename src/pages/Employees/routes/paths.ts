@@ -1,6 +1,6 @@
-export const SETTINGS_ROUTES = {
+export const EMPLOYEE_ROUTES = {
   PERSONAL: "",
-  SECURITY: "security",
+  CREATE: "create",
   SESSION: "session",
   NOTFOUND: "*",
 };
