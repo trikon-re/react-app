@@ -2,7 +2,6 @@ import { useCreateRole } from "@/queries/roles";
 import handleResponse from "@/utilities/handleResponse";
 import Label from "@components/Label";
 import { message } from "@components/antd/message";
-import Iconify from "@components/iconify";
 import { Button } from "@mui/material";
 import { Divider, Input } from "antd";
 import { Controller, useForm } from "react-hook-form";

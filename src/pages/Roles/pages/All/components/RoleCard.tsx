@@ -1,12 +1,5 @@
-import { stringAvatar } from "@/utilities/stringAvatar";
-import { ClassNames } from "@emotion/react";
 import { Icon } from "@iconify/react";
-import {
-  Avatar,
-  IconButton,
-  ListItemButton,
-  ListItemText,
-} from "@mui/material";
+import { IconButton, ListItemButton, ListItemText } from "@mui/material";
 import { IRoles } from "@pages/Roles/types";
 import { Tag } from "antd";
 import React from "react";
@@ -15,7 +8,7 @@ import moment from "moment";
 const RoleCard: React.FC<{ role: IRoles }> = ({ role }) => {
   return (
     <ListItemButton
-      className="hover:bg-slate-50 rounded-lg py-2  my-2 overflow-hidden md:items-center items-start gap-4 "
+      className="hover:bg-slate-50 rounded-lg py-2  my-2 overflow-hidden md:items-center items-start gap-4"
       disableRipple
       disableTouchRipple
     >
