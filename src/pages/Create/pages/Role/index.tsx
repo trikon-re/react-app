@@ -51,80 +51,83 @@ const Create: React.FC = () => {
           </Link>
         </div>
         <div className="flex flex-row  mx-auto max-w-5xl">
-          <div className="px-3">
-            <Label className="mt-2 mb-1">Name of Role</Label>
-            <Controller
-              control={control}
-              name={"name"}
-              rules={{ required: true }}
-              render={({
-                field: { onChange, onBlur, value },
-                fieldState: { error },
-              }) => (
-                <Input
-                  // disabled
-                  placeholder={"Role"}
-                  size={"large"}
-                  onChange={onChange}
-                  onBlur={onBlur}
-                  value={value}
-                  status={error ? "error" : ""}
-                  //   suffix={<ErrorSuffix error={error} />}
-                />
-              )}
-            />
+          <div className="max-w-lg mx-auto">
+            <Divider orientation="left">Basic Info</Divider>
+            <div className="px-3">
+              <Label className="mt-2 mb-1">Name of Role</Label>
+              <Controller
+                control={control}
+                name={"name"}
+                rules={{ required: true }}
+                render={({
+                  field: { onChange, onBlur, value },
+                  fieldState: { error },
+                }) => (
+                  <Input
+                    // disabled
+                    placeholder={"Role"}
+                    size={"large"}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    value={value}
+                    status={error ? "error" : ""}
+                    //   suffix={<ErrorSuffix error={error} />}
+                  />
+                )}
+              />
 
-            <Label className="mt-2 mb-1 ">Suffix</Label>
-            <Controller
-              control={control}
-              name={"suffix"}
-              // rules={{ required: true }}
-              render={({
-                field: { onChange, onBlur, value },
-                fieldState: { error },
-              }) => (
-                <Input
-                  placeholder={"Enter Role Suffix"}
-                  size={"large"}
-                  onChange={onChange}
-                  onBlur={onBlur}
-                  value={value}
-                  status={error ? "error" : ""}
-                  //   suffix={<ErrorSuffix error={error} />}
-                />
-              )}
-            />
+              <Label className="mt-2 mb-1 ">Suffix</Label>
+              <Controller
+                control={control}
+                name={"suffix"}
+                // rules={{ required: true }}
+                render={({
+                  field: { onChange, onBlur, value },
+                  fieldState: { error },
+                }) => (
+                  <Input
+                    placeholder={"Enter Role Suffix"}
+                    size={"large"}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    value={value}
+                    status={error ? "error" : ""}
+                    //   suffix={<ErrorSuffix error={error} />}
+                  />
+                )}
+              />
 
-            <Label className="mt-2 mb-1">Description</Label>
-            <Controller
-              control={control}
-              name={"description"}
-              rules={{ required: true }}
-              render={({
-                field: { onChange, onBlur, value },
-                fieldState: { error },
-              }) => (
-                <TextArea
-                  rows={4}
-                  placeholder={"Enter Role Description"}
-                  maxLength={200}
-                  onChange={onChange}
-                  onBlur={onBlur}
-                  value={value}
-                  status={error ? "error" : ""}
-                />
-              )}
-            />
-            <Button
-              variant="contained"
-              fullWidth
-              size="large"
-              type={"submit"}
-              className="mt-5 bg-slate-600 "
-              disabled={roleCreating}
-            >
-              Submit
-            </Button>
+              <Label className="mt-2 mb-1">Description</Label>
+              <Controller
+                control={control}
+                name={"description"}
+                rules={{ required: true }}
+                render={({
+                  field: { onChange, onBlur, value },
+                  fieldState: { error },
+                }) => (
+                  <TextArea
+                    rows={4}
+                    placeholder={"Enter Role Description"}
+                    maxLength={200}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    value={value}
+                    status={error ? "error" : ""}
+                  />
+                )}
+              />
+              <Button
+                variant="contained"
+                fullWidth
+                size="large"
+                type={"submit"}
+                className="mt-5 bg-slate-600 "
+                disabled={roleCreating}
+              >
+                Submit
+              </Button>
+            </div>
           </div>
         </div>
       </form>
