@@ -1,7 +1,14 @@
 import React from "react";
+import EmployeeDetailsRoutes from "./routes";
+import Navigator from "./Navigator";
 
 const Details: React.FC = () => {
-  return <div>EmployeeDetails</div>;
+  return (
+    <>
+      <Navigator />
+      <EmployeeDetailsRoutes />
+    </>
+  );
 };
 
 export default Details;
