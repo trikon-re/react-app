@@ -19,6 +19,10 @@ export const privateRoutes = [
     Component: lazy(() => import("@pages/Roles")),
   },
   {
+    path: PRIVATE_ROUTES.INFO,
+    Component: lazy(() => import("@pages/Info")),
+  },
+  {
     path: PRIVATE_ROUTES.USERINFO,
     Component: lazy(() => import("@pages/UserInfo")),
   },
