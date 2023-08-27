@@ -184,9 +184,10 @@ const Personal: React.FC = () => {
               fieldState: { error },
             }) => (
               <Segmented
+                block
                 placeholder={"Gender"}
                 size={"large"}
-                className="relative"
+                className="relative w-full"
                 onChange={onChange}
                 onBlur={onBlur}
                 value={value}
