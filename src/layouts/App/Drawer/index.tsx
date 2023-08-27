@@ -47,4 +47,5 @@ const AppDrawer: React.FC = () => {
 			</div>
 		</aside>
 	);
+};
 export default AppDrawer;
