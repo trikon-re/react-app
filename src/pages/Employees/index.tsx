@@ -3,12 +3,13 @@ import Navigator from "./Navigator";
 import EmployeeRoutes from "./routes";
 
 const Employees: React.FC = () => {
-  return (
-    <>
-      <Navigator />
-      <EmployeeRoutes />
-    </>
-  );
+
+	return (
+		<>
+			<Navigator />
+			<EmployeeRoutes />
+		</>
+	);
 };
 
 export default Employees;
