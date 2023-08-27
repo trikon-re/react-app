@@ -3,6 +3,7 @@ import Menu from "./components/Menu";
 import { Avatar, IconButton, ListItemText } from "@mui/material";
 import { Icon } from "@iconify/react";
 import useUser from "@/hooks/useUser";
+import { useNavigate } from "react-router-dom";
 
 function stringToColor(string: string) {
   let hash = 0;
@@ -35,6 +36,7 @@ function stringAvatar(name: string) {
 
 const AppDrawer: React.FC = () => {
   const { first_name, last_name, role, id } = useUser();
+  const navigate = useNavigate();
   return (
     <aside className="bg-background-light overflow-y-auto overflow-x-hidden rounded-md p-4 flex-[0.40] max-w-[350px] hidden lg:inline">
       <Menu mode="inline" />
@@ -67,7 +69,10 @@ const AppDrawer: React.FC = () => {
           }}
         />
         <IconButton color="secondary">
-          <Icon icon={"solar:settings-bold-duotone"} />
+          <Icon
+            icon={"solar:settings-bold-duotone"}
+            onClick={() => navigate("/app/settings")}
+          />
         </IconButton>
       </div>
     </aside>
