@@ -16,7 +16,7 @@ const Create: React.FC = () => {
   const { mutateAsync: createEmployee, isLoading: employeeCreating } =
     useCreateEmployee();
 
-  const { handleSubmit, control } = useForm({
+  const { handleSubmit, control, reset } = useForm({
     // resolver: joiResolver(loginResolver),
   });
 
@@ -35,6 +35,7 @@ const Create: React.FC = () => {
     );
     messageApi.destroy();
     if (res.status) {
+      reset();
       messageApi.success("Employee created successfully!");
     } else {
       messageApi.error(res.message);
@@ -97,6 +98,27 @@ const Create: React.FC = () => {
                   )}
                 />
               </Input.Group>
+              <Label className="mt-2 mb-1">Username</Label>
+              <Controller
+                control={control}
+                name={"username"}
+                rules={{ required: true }}
+                render={({
+                  field: { onChange, onBlur, value },
+                  fieldState: { error },
+                }) => (
+                  <Input
+                    // disabled
+                    placeholder={"Username"}
+                    size={"large"}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    value={value}
+                    status={error ? "error" : ""}
+                    //   suffix={<ErrorSuffix error={error} />}
+                  />
+                )}
+              />
 
               <Label className="mt-2 mb-1">Phone</Label>
               <Controller
@@ -312,7 +334,7 @@ const Create: React.FC = () => {
                 }) => (
                   <>
                     <Label
-                      isRequired
+                      //   isRequired
                       className="flex flex-row items-center gap-1 mt-2 my-1 "
                     >
                       Role
@@ -375,13 +397,16 @@ const Create: React.FC = () => {
             <div className="w-full">
               <Divider orientation="left">Payroll Information</Divider>
               <div className="px-3">
-                <Label isRequired className="mt-2 mb-1">
+                <Label
+                  // isRequired
+                  className="mt-2 mb-1"
+                >
                   Work Hours
                 </Label>
                 <Controller
                   control={control}
                   name={"work_hour"}
-                  rules={{ required: true }}
+                  //   rules={{ required: true }}
                   render={({
                     field: { onChange, onBlur, value },
                     fieldState: { error },
@@ -402,7 +427,7 @@ const Create: React.FC = () => {
                 <Controller
                   control={control}
                   name={"bank"}
-                  rules={{ required: true }}
+                  //   rules={{ required: true }}
                   render={({
                     field: { onChange, onBlur, value },
                     fieldState: { error },
