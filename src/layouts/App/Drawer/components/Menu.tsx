@@ -233,20 +233,42 @@ const items: MenuItem[] = [
           ),
         ]
       ),
-      getItem("Roles", "/roles", <Icon icon={"radix-icons:dashboard"} />, [
+      getItem("Roles", "/app/role", <Icon icon={"radix-icons:dashboard"} />, [
         getItem(
           "Create New Role",
-          "/app/roles/create",
+          "/app/create/role",
           <Icon icon={"radix-icons:dashboard"} />
         ),
         getItem(
           "List of Roles",
-          "/app/overview",
-          <Icon icon={"radix-icons:dashboard"} />
+          "/app/roles/all",
+          <Icon icon={"radix-icons:dashboard"} />,
+          [
+            getItem(
+              "All Roles",
+              "/app/roles",
+              <Icon icon={"radix-icons:dashboard"} />
+            ),
+            getItem(
+              "New Roles",
+              "/app/roles/all?join_date<7d",
+              <Icon icon={"radix-icons:dashboard"} />
+            ),
+            getItem(
+              "Active Roles",
+              "/app/roles/all?active=true",
+              <Icon icon={"radix-icons:dashboard"} />
+            ),
+            getItem(
+              "Suspended Roles",
+              "/app/roles/all?is_active=false",
+              <Icon icon={"radix-icons:dashboard"} />
+            ),
+          ]
         ),
         getItem(
           "Trash",
-          "/app/employees/trash",
+          "/app/roles/trash",
           <Icon icon={"radix-icons:dashboard"} />
         ),
       ]),
