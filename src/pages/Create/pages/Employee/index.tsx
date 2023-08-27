@@ -45,13 +45,13 @@ const Create: React.FC = () => {
     <>
       {contextHolder}
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-col md:flex-row items-center justify-between max-w-4xl mx-auto my-2 px-5 py-3 text-text">
+        <div className="flex flex-col md:flex-row items-center justify-between max-w-5xl mx-auto my-2 px-5 py-3 text-text">
           <h1 className="font-bold text-3xl">Create New Employee</h1>
           <Link to={"/app/employees"} className="font-bold text-sm">
             View All Employees
           </Link>
         </div>
-        <div className="flex flex-row container mx-auto max-w-4xl">
+        <div className="flex flex-row container mx-auto max-w-5xl">
           <div className="w-full">
             <Divider orientation="left">Basic Info</Divider>
             <div className="px-3">
@@ -67,7 +67,7 @@ const Create: React.FC = () => {
                   }) => (
                     <Input
                       className="w-1/2"
-                      placeholder={"First Name"}
+                      placeholder={"Enter First Name"}
                       size={"large"}
                       onChange={onChange}
                       onBlur={onBlur}
@@ -87,7 +87,7 @@ const Create: React.FC = () => {
                   }) => (
                     <Input
                       className="w-1/2"
-                      placeholder={"Last Name"}
+                      placeholder={"Enter Last Name"}
                       size={"large"}
                       onChange={onChange}
                       onBlur={onBlur}
@@ -120,6 +120,27 @@ const Create: React.FC = () => {
                 )}
               />
 
+              <Label className="mt-2 mb-1 ">Email</Label>
+              <Controller
+                control={control}
+                name={"email"}
+                rules={{ required: true }}
+                render={({
+                  field: { onChange, onBlur, value },
+                  fieldState: { error },
+                }) => (
+                  <Input
+                    placeholder={"Enter Email Address"}
+                    size={"large"}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    value={value}
+                    status={error ? "error" : ""}
+                    //   suffix={<ErrorSuffix error={error} />}
+                  />
+                )}
+              />
+
               <Label className="mt-2 mb-1">Phone</Label>
               <Controller
                 control={control}
@@ -131,28 +152,7 @@ const Create: React.FC = () => {
                 }) => (
                   <Input
                     // disabled
-                    placeholder={"Phone"}
-                    size={"large"}
-                    onChange={onChange}
-                    onBlur={onBlur}
-                    value={value}
-                    status={error ? "error" : ""}
-                    //   suffix={<ErrorSuffix error={error} />}
-                  />
-                )}
-              />
-
-              <Label className="mt-2 mb-1">Email</Label>
-              <Controller
-                control={control}
-                name={"email"}
-                rules={{ required: true }}
-                render={({
-                  field: { onChange, onBlur, value },
-                  fieldState: { error },
-                }) => (
-                  <Input
-                    placeholder={"Email"}
+                    placeholder={"Enter Phone Number"}
                     size={"large"}
                     onChange={onChange}
                     onBlur={onBlur}
@@ -173,6 +173,7 @@ const Create: React.FC = () => {
                   fieldState: { error },
                 }) => (
                   <Segmented
+                    block
                     placeholder={"Gender"}
                     size={"large"}
                     className="relative w-full"
@@ -224,7 +225,7 @@ const Create: React.FC = () => {
                     size="large"
                     className={"w-full"}
                     prefix={<Iconify icon={"ph:link"} />}
-                    placeholder="Curriculum Vitae"
+                    placeholder="Attachment"
                     onChange={onChange}
                     onBlur={onBlur}
                     value={value}
@@ -249,7 +250,7 @@ const Create: React.FC = () => {
                   fieldState: { error },
                 }) => (
                   <Input
-                    placeholder={"Address"}
+                    placeholder={"Enter Address Line 1"}
                     size={"large"}
                     onChange={onChange}
                     onBlur={onBlur}
@@ -272,7 +273,7 @@ const Create: React.FC = () => {
                 }) => (
                   <Input
                     disabled
-                    placeholder={"Address"}
+                    placeholder={"Enter Address Line 2"}
                     size={"large"}
                     onChange={onChange}
                     onBlur={onBlur}
@@ -315,7 +316,7 @@ const Create: React.FC = () => {
                   )}  */}
                     </Label>
                     <Input.Password
-                      placeholder="New Password"
+                      placeholder="Enter Password"
                       size="large"
                       onChange={onChange}
                       onBlur={onBlur}
@@ -356,7 +357,7 @@ const Create: React.FC = () => {
                       size="large"
                       showSearch
                       className="w-full"
-                      placeholder={"Search Role.."}
+                      placeholder={"Select a Role..."}
                       suffixIcon={<Iconify icon={"mingcute:search-3-line"} />}
                       //   onChange={handleChange}
                       //   options={[
@@ -433,7 +434,7 @@ const Create: React.FC = () => {
                     fieldState: { error },
                   }) => (
                     <Input
-                      placeholder={"Bank"}
+                      placeholder={"Enter Bank"}
                       size={"large"}
                       onChange={onChange}
                       onBlur={onBlur}
@@ -455,7 +456,7 @@ const Create: React.FC = () => {
                     fieldState: { error },
                   }) => (
                     <Input
-                      placeholder={"Input Salary"}
+                      placeholder={"Enter Salary"}
                       addonAfter={<Iconify icon={"tabler:currency-taka"} />}
                       size={"large"}
                       onChange={onChange}
