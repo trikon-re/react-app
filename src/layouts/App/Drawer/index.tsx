@@ -46,7 +46,7 @@ const AppDrawer: React.FC = () => {
             className: "text-[10px] leading-tight font-semibold",
           }}
         />
-        <Link to={"/settings"}>
+        <Link to={"/app/settings"}>
           <IconButton color="secondary">
             <Icon icon={"solar:settings-bold-duotone"} />
           </IconButton>
