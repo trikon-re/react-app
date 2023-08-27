@@ -13,15 +13,10 @@ import React from "react";
 const RoleCard: React.FC<{ role: IRoles }> = ({ role }) => {
   return (
     <ListItemButton
-      className="hover:bg-slate-50 rounded-lg py-1 px-2 my-1 overflow-hidden md:items-center items-start gap-4"
+      className="hover:bg-slate-50 rounded-lg py-5 px-2 my-2 overflow-hidden md:items-center items-start gap-"
       disableRipple
       disableTouchRipple
     >
-      <Avatar
-        variant="rounded"
-        // {...stringAvatar(`${role?.name}`)}
-        className="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-md mt-1"
-      />
       <ListItemText
         primary={
           <div className="flex flex-row gap-2">
