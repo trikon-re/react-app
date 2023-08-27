@@ -4,4 +4,5 @@ export type IRoles = {
   description: string;
   is_active: boolean;
   updated_at: string;
+  prefix: string;
 };

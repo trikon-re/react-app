@@ -18,15 +18,17 @@ const RoleCard: React.FC<{ role: IRoles }> = ({ role }) => {
           primary={
             <div className="flex flex-row gap-2 ">
               <p className="text-lg font-medium">{role?.name}</p>
-              <Tag color={`${role?.is_active ? "green" : "red"}`}>
-                {role?.is_active ? "active" : "inactive"}
-              </Tag>
+              <div>
+                <Tag color={`${role?.is_active ? "green" : "red"}`}>
+                  {role?.is_active ? "active" : "inactive"}
+                </Tag>
+              </div>
             </div>
           }
           secondary={
             <>
-              <p className="text-sm font-semibold text-text-light">
-                @{role?.name}
+              <p className="text-sm font-semibold text-text-light uppercase">
+                @{role?.prefix}
               </p>
               <p className="text-sm font-medium my-0.5">{role?.description}</p>
             </>

@@ -3,7 +3,7 @@ import React from "react";
 import { Icon } from "@iconify/react";
 
 import type { MenuProps } from "antd";
-import { DatePicker, Input, Menu } from "antd";
+import { DatePicker, Input, Menu, Tag } from "antd";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { ROUTES } from "./routes/paths";
 
@@ -39,12 +39,10 @@ const Navigator: React.FC = () => {
   return (
     <>
       <div className="flex flex-row items-center justify-between border-b">
-        <div className="flex flex-row items-center justify-between gap-2">
+        <div className="flex flex-row items-center justify-between gap-2 px-5">
           <Icon icon="ic:twotone-person-pin" className="text-xl" />
-          <p>
-            employees/
-            {params.id}
-          </p>
+          <p>employees / {params.id}</p>
+          <Tag color="#2ADBA4">Active</Tag>
         </div>
         <Menu
           onClick={onClick}

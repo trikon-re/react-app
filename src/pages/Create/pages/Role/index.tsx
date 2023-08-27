@@ -75,17 +75,17 @@ const Create: React.FC = () => {
                 )}
               />
 
-              <Label className="mt-2 mb-1 ">Suffix</Label>
+              <Label className="mt-2 mb-1 ">Prefix</Label>
               <Controller
                 control={control}
-                name={"suffix"}
+                name={"prefix"}
                 // rules={{ required: true }}
                 render={({
                   field: { onChange, onBlur, value },
                   fieldState: { error },
                 }) => (
                   <Input
-                    placeholder={"Enter Role Suffix"}
+                    placeholder={"Enter Role Preffix"}
                     size={"large"}
                     onChange={onChange}
                     onBlur={onBlur}
