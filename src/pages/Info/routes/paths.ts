@@ -1,4 +1,4 @@
 export const ROUTES = {
-  EMPLOYEE: "employee/:id",
+  EMPLOYEE: "employee/:id/*",
   NOTFOUND: "*",
 };
