@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { empRoutes } from "./employeeRoutes";
 import NProgressSuspense from "@components/NProgressSuspense";
 
-const RestaurantRoutes: React.FC = () => {
+const EmployeeRoutes: React.FC = () => {
   return (
     <Routes>
       {empRoutes?.map?.(({ path, Component }) => (
@@ -21,4 +21,4 @@ const RestaurantRoutes: React.FC = () => {
   );
 };
 
-export default RestaurantRoutes;
+export default EmployeeRoutes;
