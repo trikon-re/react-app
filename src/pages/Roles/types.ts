@@ -5,4 +5,6 @@ export type IRoles = {
   is_active: boolean;
   updated_at: string;
   prefix: string;
+  total_employees: number;
+  total_permissions: number;
 };

@@ -12,7 +12,8 @@ const RoleCard: React.FC<{ role: IRoles }> = ({ role }) => {
       disableRipple
       disableTouchRipple
     >
-      <div className="flex flex-col flex-1 md:flex-row md:items-center items-start justify-between">
+      {/* <div className="flex flex-row flex-1 md:flex-row md:items-center items-start justify-between"> */}
+      <div className="grid md:grid-cols-3 grid-cols-1 justify-between items-center flex-1">
         {/* Admin name */}
         <ListItemText
           primary={
@@ -44,29 +45,33 @@ const RoleCard: React.FC<{ role: IRoles }> = ({ role }) => {
           key={role?.id}
         />
 
-        <div className="flex flex-row md:items-center items-start justify-center gap-4 py-2 md:py-0 flex-1">
+        <div className="flex flex-row md:items-center  md:gap-4 gap-2 py-2 md:py-0 ">
           {/* Assigned employee list */}
           <div className="flex flex-row  gap-2">
             <Icon
               icon="ic:twotone-person-pin"
               className="text-xl text-text-light"
             />
-            <p className="text-sm font-semibold text-text-light">{`${role?.name}`}</p>
+            <p className="text-sm font-semibold text-text-light">
+              {`${role?.total_employees}`} Employees
+            </p>
           </div>
 
           {/* Assigned permission list */}
           <div className="flex flex-row gap-2">
             <Icon
               icon="fluent-mdl2:permissions"
-              className="text-xl text-text-light"
+              className="text-md text-text-light"
             />
-            <p className="text-sm font-semibold text-text-light">{`${role?.name}`}</p>
+            <p className="text-sm font-semibold text-text-light">
+              {`${role?.total_permissions}`} Permissions
+            </p>
           </div>
         </div>
 
         {/* last update */}
 
-        <div className="w-fit">
+        <div className="flex flex-col md:items-end ">
           <p className="text-sm font-medium md:text-right text-text-light">
             Last updated
           </p>
