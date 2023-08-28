@@ -11,16 +11,18 @@ const items: MenuProps["items"] = [
   {
     label: "Overview",
     key: ROUTES.OVERVIEW,
-    icon: <Icon icon="openmoji:overview" className="text-xl" />,
+    icon: <Icon icon="ph:book-open-duotone" className="text-xl" />,
   },
   {
     label: "Performance",
     key: ROUTES.PERFORMANCE,
+    disabled: true,
     icon: <Icon icon="mdi:performance" className="text-xl" />,
   },
   {
     label: "Attendance",
     key: ROUTES.ATTENDANCE,
+    disabled: true,
     icon: <Icon icon="ic:round-show-chart" className="text-xl" />,
   },
 ];
@@ -39,16 +41,16 @@ const Navigator: React.FC = () => {
   return (
     <>
       <div className="flex md:flex-row flex-col md:items-center items-start justify-between border-b">
-        <div className="flex flex-row  items-center justify-between gap-2 px-5">
+        <div className="flex flex-row  items-center justify-between gap-2 px-5 font-semibold text-text-light">
           <>
-            <Icon icon="ic:twotone-person-pin" className="text-xl" />
+            <Icon icon="clarity:id-badge-solid" className="text-xl" />
             <p>employees / {params.id}</p>
           </>
           <Tag color="#2ADBA4">Active</Tag>
         </div>
         <Menu
           onClick={onClick}
-          selectedKeys={[location.pathname?.split?.("/")[3] || ""]}
+          selectedKeys={[location.pathname?.split?.("/")[5] || ""]}
           mode="horizontal"
           items={items}
           className={"border-b-0 w-full max-w-md"}
