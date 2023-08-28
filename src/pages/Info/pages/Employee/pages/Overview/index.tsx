@@ -1,17 +1,9 @@
 import Label from "@components/Label";
-import { Divider, Input, Tag } from "antd";
+import { Input, Tag } from "antd";
 import { Controller, FieldValues, useForm } from "react-hook-form";
-import {
-  Avatar,
-  Button,
-  ListItemButton,
-  IconButton,
-  ListItemText,
-  Divider as MuiDivider,
-} from "@mui/material";
+import { Avatar, IconButton, Divider as MuiDivider } from "@mui/material";
 import React from "react";
 import { Icon } from "@iconify/react";
-import TextArea from "antd/es/input/TextArea";
 import { useParams } from "react-router-dom";
 import {
   useGetEmployeesById,
@@ -20,6 +12,7 @@ import {
 import { stringAvatar } from "@/utilities/stringAvatar";
 import handleResponse from "@/utilities/handleResponse";
 import { message } from "@components/antd/message";
+import moment from "moment";
 
 const Overview: React.FC = () => {
   const params = useParams();
@@ -50,13 +43,13 @@ const Overview: React.FC = () => {
       email: employeeInfo?.email,
       gender: employeeInfo?.gender,
       dob: employeeInfo?.dob,
-      hired_date: employeeInfo?.hireDate,
-      max_session: employeeInfo?.hireDate,
-      work_hour: employeeInfo?.workHour,
-      salary: employeeInfo?.workHour,
+      hired_date: employeeInfo?.hired_date,
+      max_session: employeeInfo?.max_session,
+      work_hour: employeeInfo?.work_hour,
+      salary: employeeInfo?.salary,
       bank: employeeInfo?.bank,
-      address: employeeInfo?.bank,
-      display_picture: employeeInfo?.bKash,
+      address: employeeInfo?.address,
+      display_picture: employeeInfo?.display_picture,
       role_id: employeeInfo?.role?._id,
     });
   }, [employeeInfo]);
@@ -82,7 +75,7 @@ const Overview: React.FC = () => {
   return (
     <>
       <form onSubmit={handleSubmit(onValid)}>
-        <div className="flex flex-row container mx-auto max-w-5xl">
+        <div className="flex md:flex-row flex-col container mx-auto max-w-5xl">
           <div className="w-full p-3">
             <Avatar
               variant="rounded"
@@ -90,10 +83,10 @@ const Overview: React.FC = () => {
               {...stringAvatar(
                 `${employeeInfo?.first_name} ${employeeInfo?.last_name}`
               )}
-              className="float-left md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-xl  m-2"
+              className="float-left w-[100px] h-[100px]  rounded-xl  m-2 "
             />
 
-            <div className="flex flex-col gap-2 items-start">
+            <div className="flex flex-col gap-2 items-start px-2">
               <p className="text-2xl font-bold text-text-light">
                 {`${employeeInfo?.first_name} ${employeeInfo?.last_name}`}
                 <IconButton className="float-right">
@@ -127,8 +120,8 @@ const Overview: React.FC = () => {
                 fieldState: { error },
               }) => (
                 <Input
-                  // className="w-1/2"
-                  placeholder="First Name"
+                  className="mt-2"
+                  placeholder={employeeInfo?.address}
                   size="large"
                   onChange={onChange}
                   onBlur={onBlur}
@@ -144,14 +137,14 @@ const Overview: React.FC = () => {
                 <Icon icon="ph:phone" color="#999" className="mr-1 text-xl" />
               }
               className="my-2 text-md"
-              placeholder={"Enter Phone Number"}
+              placeholder={employeeInfo?.phone}
               size={"large"}
             />
             {/* Email */}
             <Input
               readOnly
               className="my-2 text-md"
-              placeholder={"Enter Email"}
+              placeholder={employeeInfo?.email}
               size={"large"}
               prefix={
                 <Icon
@@ -165,7 +158,7 @@ const Overview: React.FC = () => {
               <Input
                 readOnly
                 className="my-2 text-md"
-                placeholder={"DOB"}
+                placeholder={moment(employeeInfo?.dob).format("L")}
                 size={"large"}
                 prefix={
                   <Icon
@@ -178,7 +171,7 @@ const Overview: React.FC = () => {
               <Input
                 readOnly
                 className="my-2 text-md"
-                placeholder={"Gender"}
+                placeholder={employeeInfo?.gender}
                 size={"large"}
                 prefix={
                   <Icon
@@ -208,7 +201,7 @@ const Overview: React.FC = () => {
                   />
                 }
                 className="my-2 text-md text-text-light"
-                placeholder={"work hour"}
+                placeholder={employeeInfo?.work_hour}
                 size={"large"}
               />
 
@@ -223,7 +216,7 @@ const Overview: React.FC = () => {
                   />
                 }
                 className="my-2 text-md text-text-light"
-                placeholder={"card info"}
+                placeholder={employeeInfo?.bank}
                 size={"large"}
               />
 
@@ -238,7 +231,7 @@ const Overview: React.FC = () => {
                   />
                 }
                 className="my-2 text-md text-text-light"
-                placeholder={"salary"}
+                placeholder={employeeInfo?.salary}
                 size={"large"}
               />
             </div>
