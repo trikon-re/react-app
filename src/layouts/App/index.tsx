@@ -21,7 +21,7 @@ const AppLayout: React.FC = () => {
 	return isLoggedIn ? (
 		<>
 			<div className="lg:bg-background flex flex-col lg:flex-row lg:gap-6 lg:p-6 h-screen ">
-				<aside className="bg-background-light overflow-hidden rounded-md p-4 flex-[0.40] max-w-[300px] hidden lg:flex flex-col relative">
+				<aside className="bg-background-light overflow-hidden rounded-md p-4 flex-[0.40] max-w-[400px] hidden lg:flex flex-col relative">
 					<AppDrawer />
 				</aside>
 				<AppBar className="lg:hidden bg-primary-50">
