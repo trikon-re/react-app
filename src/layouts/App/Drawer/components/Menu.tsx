@@ -6,19 +6,19 @@ import { useLocation, useNavigate } from "react-router-dom";
 type MenuItem = Required<MenuProps>["items"][number];
 
 function getItem(
-	label: React.ReactNode,
-	key: React.Key,
-	icon?: React.ReactNode,
-	children?: MenuItem[],
-	disabled?: boolean
+  label: React.ReactNode,
+  key: React.Key,
+  icon?: React.ReactNode,
+  children?: MenuItem[],
+  disabled?: boolean
 ): MenuItem {
-	return {
-		key,
-		icon,
-		children,
-		label,
-		disabled,
-	} as MenuItem;
+  return {
+    key,
+    icon,
+    children,
+    label,
+    disabled,
+  } as MenuItem;
 }
 
 const items: MenuItem[] = [
@@ -325,26 +325,26 @@ const items: MenuItem[] = [
 				),
 			]),
 		],
-	},
+	}
 ];
 
 type MenuMode = "inline" | "horizontal" | "vertical";
 
 const Menu: React.FC<{ mode?: MenuMode }> = ({ mode = "inline" }) => {
-	const navigate = useNavigate();
-	const location = useLocation();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-	return (
-		<>
-			<AntMenu
-				selectedKeys={[location.pathname]}
-				mode={mode}
-				items={items}
-				onSelect={(info) => navigate(info.key)}
-				className="relative border-none text-text-light font-semibold  [&_.ant-menu-item-selected]:bg-[#A8FFE4] [&_.ant-menu-item-selected>.ant-menu-title-content]:text-text [&_.ant-menu-item-selected>.ant-menu-item-icon]:text-[#1A946E] [&_.ant-menu-item-icon]:text-xl"
-			/>
-		</>
-	);
+  return (
+    <>
+      <AntMenu
+        selectedKeys={[location.pathname]}
+        mode={mode}
+        items={items}
+        onSelect={(info) => navigate(info.key)}
+        className="relative border-none text-text-light font-semibold  [&_.ant-menu-item-selected]:bg-[#A8FFE4] [&_.ant-menu-item-selected>.ant-menu-title-content]:text-text [&_.ant-menu-item-selected>.ant-menu-item-icon]:text-[#1A946E] [&_.ant-menu-item-icon]:text-xl"
+      />
+    </>
+  );
 };
 
 export default Menu;

@@ -1,15 +1,20 @@
 import React from "react";
 // import Label from "@components/Label";
-// import { Controller, FieldValues, useForm } from "react-hook-form";
-// import { Input, Segmented, Tag, DatePicker } from "antd";
-// import {
-//   Avatar,
-//   Button,
-//   IconButton,
-//   Divider as MuiDivider,
-// } from "@mui/material";
-// import { Icon } from "@iconify/react";
-// import { useParams } from "react-router-dom";
+// import {useForm } from "react-hook-form";
+import {
+  Divider,
+  Input,
+  Tag,
+  //  Input, Segmented,  DatePicker
+} from "antd";
+import {
+  Avatar,
+  // Button,
+  // IconButton,
+  // Divider as MuiDivider,
+} from "@mui/material";
+import { Icon } from "@iconify/react";
+import { Link, useParams } from "react-router-dom";
 // import {
 //   useGetEmployeesById,
 //   useUpdateEmployeesById,
@@ -17,28 +22,29 @@ import React from "react";
 // import { stringAvatar } from "@/utilities/stringAvatar";
 // import handleResponse from "@/utilities/handleResponse";
 // import { message } from "@components/antd/message";
-// import Iconify from "@components/iconify";
+import Iconify from "@components/iconify";
 // import * as dayjs from "dayjs";
 // import { Button as AntButton } from "antd";
+import { useGetPropertiesById } from "@/queries/properties";
+import { useGetMediaById } from "@/queries/media";
+import { stringAvatar } from "@/utilities/stringAvatar";
+import Label from "@components/Label";
 
 const Overview: React.FC = () => {
-  // const params = useParams();
+  const params = useParams();
   // const [messageApi, contextHolder] = message.useMessage();
-  // const {
-  //   reset,
-  //   handleSubmit,
-  //   control,
-  //   formState: { isDirty },
-  // } = useForm({});
-  // const { data } = useGetEmployeesById(params.id);
-  // const [employeeInfo, setEmployeeInfo] = React.useState<any>([]);
+  // const { control } = useForm({});
+  const { data } = useGetPropertiesById(params.id);
+  const [propertyInfo, setPropertyInfo] = React.useState<any>([]);
   // const { mutateAsync: updateEmployee, isLoading: isSubmitting } =
   //   useUpdateEmployeesById();
+  const { data: mediaData } = useGetMediaById(propertyInfo?.media_id);
+  React.useEffect(() => {
+    if (!data) return;
+    setPropertyInfo(data?.data?.data);
+  }, [data]);
 
-  // React.useEffect(() => {
-  //   if (!data) return;
-  //   setEmployeeInfo(data?.data?.data);
-  // }, [data]);
+  console.log(mediaData);
 
   // React.useEffect(() => {
   //   if (!employeeInfo || isDirty) return;
@@ -79,312 +85,271 @@ const Overview: React.FC = () => {
   //   else messageApi.error(res.message);
   // };
   return (
-    <></>
-    // <>
-    //   {contextHolder}
-    //   <form onSubmit={handleSubmit(onValid)}>
-    //     <div className="grid grid-cols-3  container mx-auto max-w-5xl">
-    //       <div className="w-full p-3">
-    //         <div className="flex flex-row">
-    //           <Avatar
-    //             variant="rounded"
-    //             src={employeeInfo?.display_picture}
-    //             {...stringAvatar(
-    //               `${employeeInfo?.first_name} ${employeeInfo?.last_name}`
-    //             )}
-    //             className="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-xl  m-2"
-    //           />
+    <>
+      {/* {contextHolder} */}
+      {/* <form onSubmit={handleSubmit(onValid)}> */}
+      <div className="grid grid-cols-3 divide-x-2 container mx-auto max-w-5xl">
+        <div className="relative col-span-2 w-full pt-5  min-h-[100px] md:min-h-[300px]">
+          <Avatar
+            src={""}
+            variant="rounded"
+            className="relative w-full rounded-2xl h-auto bg-slate-300  min-h-[100px] md:min-h-[300px]"
+          >
+            <Iconify
+              icon={"mdi:image-text"}
+              className="text-8xl text-slate-50"
+            />
+          </Avatar>
+          <span className="flex flex-row items-center gap-1">
+            <span className="flex flex-row items-end gap-3">
+              <p className="text-lg font-bold text-text-light pt-3"> BDT </p>
+              <p className="text-3xl font-bold text-text-light pt-3">
+                {propertyInfo?.price}
+              </p>
+            </span>
+            <Icon className="text-xl text-text" icon={"tabler:currency-taka"} />
+          </span>
+          <span className="flex flex-row items-center gap-1 flex-wrap mt-2">
+            <Icon className="text-lg text-text-light" icon="entypo:address" />
+            <p className="text-sm font-semibold text-text">
+              {`${propertyInfo?.["address.plot"]} ${propertyInfo?.["address.road"]}, ${propertyInfo?.["address.sector"]}, ${propertyInfo?.["address.block"]}, ${propertyInfo?.["address.area"]}, ${propertyInfo?.["address.city"]}`}
+            </p>
+          </span>
+          <span>
+            {propertyInfo?.description ? (
+              <p className="text-sm font-medium text-text-light text-justify pt-3">
+                propertyInfo?.description
+              </p>
+            ) : (
+              <p className="text-sm font-medium text-text-light text-justify pt-3">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
+                mollitia, molestiae quas vel sint commodi repudiandae
+                consequuntur voluptatum laborum numquam blanditiis harum
+                quisquam eius sed odit fugiat iusto fuga praesentium optio,
+                eaque rerum! Provident similique accusantium nemo autem.
+                Veritatis obcaecati tenetur iure eius earum ut molestias
+                architecto voluptate aliquam nihil, eveniet aliquid culpa
+                officia aut! Impedit sit sunt quaerat, odit, tenetur error,
+                harum nesciunt ipsum debitis quas aliquid. Reprehenderit, quia.
+                Quo neque error repudiandae fuga? Ipsa laudantium molestias eos
+                sapiente officiis modi at sunt excepturi expedita sint? Sed
+                quibusdam recusandae alias error harum maxime adipisci amet
+                laborum.
+              </p>
+            )}
+          </span>
+          <Divider
+            orientation="left"
+            className="text-lg font-semibold text-text pt-4"
+          >
+            Interested Buyers
+          </Divider>
 
-    //           <div className="flex flex-col gap-2 items-start">
-    //             <p className="text-2xl font-bold text-text-light">
-    //               {`${employeeInfo?.first_name} ${employeeInfo?.last_name}`}
-    //               <IconButton className="float-right w-10">
-    //                 <Icon
-    //                   className="text-text-dark "
-    //                   icon="material-symbols:edit-outline"
-    //                 />
-    //               </IconButton>
-    //             </p>
-    //             <p className="text-sm font-medium text-text-light -mt-3">
-    //               {employeeInfo?.role
-    //                 ? employeeInfo?.role?.name
-    //                 : "No Role Assigned"}
-    //               <br />
-    //               <span>@{employeeInfo?.username}</span>
-    //             </p>
+          {/* <Controller
+                control={control}
+                name={"cv"}
+                // rules={{ required: true }}
+                render={({
+                  field: { onChange, onBlur, value },
+                  fieldState: { error },
+                }) => ( */}
+          <Input
+            size="large"
+            className={"w-full"}
+            prefix={<Iconify icon={"ph:link"} />}
+            placeholder="Link a Buyer"
+            // onChange={onChange}
+            // onBlur={onBlur}
+            // value={value}
+          />
+          {/* )}
+              /> */}
+        </div>
+        <div className="mx-5">
+          <div className=" w-full px-4">
+            <p className="text-xl font-bold text-text py-4">
+              Property Information
+            </p>
+            <div>
+              <div className="flex flex-row pt-2 gap-3 ">
+                <span className="flex flex-row items-center gap-1">
+                  {propertyInfo?.type === "FLAT" ? (
+                    <>
+                      <Icon
+                        className="text-2xl text-text-light"
+                        icon={"fluent:building-20-filled"}
+                      />
+                    </>
+                  ) : propertyInfo?.type === "LAND" ? (
+                    <>
+                      <Icon
+                        className="text-2xl text-text-light"
+                        icon={"mdi:island"}
+                      />
+                    </>
+                  ) : (
+                    ""
+                  )}
+                  <p className="text-md font-bold text-text-light capitalize">
+                    {propertyInfo?.type?.toLowerCase()}
+                  </p>
+                </span>
+                <span className="flex flex-row items-center gap-1">
+                  <Icon
+                    className="text-xl text-text-light"
+                    icon={"fluent:slide-size-20-regular"}
+                  />
+                  <p className="text-md font-bold text-text-light">
+                    {propertyInfo?.size}
+                  </p>
+                  <p className="text-md font-bold text-text-light capitalize">
+                    {propertyInfo?.size_unit?.toLowerCase()}.
+                  </p>
+                </span>
+                <span className="flex flex-row">
+                  <Tag
+                    color="#76C6D1"
+                    className="rounded-xl w-fit text-center px-4 "
+                  >
+                    {propertyInfo?.type?.[0]}-{propertyInfo?.id}
+                  </Tag>
+                </span>
+              </div>
+              <div className="flex flex-row pt-3 gap-3 ">
+                <span className="flex flex-row items-center gap-1">
+                  <Icon
+                    className="text-2xl text-text-light"
+                    icon={"tabler:address-book"}
+                  />
+                  <p className="text-sm font-bold text-text-light">
+                    {`${mediaData?.data?.data?.first_name} ${mediaData?.data?.data?.last_name}`}
+                  </p>
+                </span>
+                <span className="flex flex-row items-center gap-1">
+                  <Icon
+                    icon="mingcute:bed-fill"
+                    className="text-xl text-text-light"
+                  />
+                  <p className="text-sm font-semibold text-text-light">
+                    {propertyInfo?.["flat.num_bedroom"]}
+                  </p>
+                </span>
+                <span className="flex flex-row items-center gap-1">
+                  <Icon icon="fa:bath" className="text-sm text-text-light" />
+                  <p className="text-md font-semibold text-text-light">
+                    {propertyInfo?.["flat.num_bathroom"]}
+                  </p>
+                </span>
+              </div>
+              <div className="flex flex-row pt-3 gap-3 ">
+                <span className="flex flex-row items-center gap-1">
+                  <Icon
+                    className="text-xl text-text-light"
+                    icon="solar:compass-big-bold"
+                  />
+                  <p className="text-sm font-semibold text-text-light">
+                    {propertyInfo?.["flat.facing_side"]}
+                  </p>
+                </span>
 
-    //             <Tag
-    //               color={employeeInfo?.verified_at ? "#087890" : "grey"}
-    //               className="flex flex-row gap-1 items-center w-fit"
-    //             >
-    //               {employeeInfo?.verified_at ? "Verified" : "Not Verified"}
-    //               <Icon icon="ic:round-verified" />
-    //             </Tag>
-    //           </div>
-    //         </div>
-    //         {/* Address */}
-    //         <div className="">
-    //           <Label className="flex flex-row items-center gap-1 mt-2 my-1 text-text font-semibold">
-    //             Address
-    //           </Label>
-    //           <Controller
-    //             control={control}
-    //             name={"address"}
-    //             rules={{ required: true }}
-    //             render={({
-    //               field: { onChange, onBlur, value },
-    //               fieldState: { error },
-    //             }) => (
-    //               <Input.TextArea
-    //                 className="text-text-light font-semibold text-sm min-h-[100px]"
-    //                 placeholder="Address..."
-    //                 size="large"
-    //                 onChange={onChange}
-    //                 onBlur={onBlur}
-    //                 value={value}
-    //                 status={error ? "error" : ""}
-    //               />
-    //             )}
-    //           />
-    //         </div>
+                <span className="flex flex-row items-center gap-1 flex-wrap">
+                  <Icon
+                    className="text-xl text-text-light"
+                    icon="entypo:address"
+                  />
+                  <p className="text-sm font-semibold text-text-light">
+                    {propertyInfo?.["address.area"]},{" "}
+                    {propertyInfo?.["address.city"]}
+                  </p>
+                </span>
+              </div>
+            </div>
+          </div>
+          <Divider
+            orientation="left"
+            className="text-lg font-semibold text-text pt-4"
+          >
+            Medial Information{" "}
+          </Divider>
 
-    //         {/* Phone */}
-    //         <Label className="flex flex-row items-center gap-1 mt-2 my-1text-text font-semibold">
-    //           Phone
-    //         </Label>
-    //         <Controller
-    //           control={control}
-    //           name={"phone"}
-    //           // rules={{ required: true }}
-    //           render={({
-    //             field: { onChange, onBlur, value },
-    //             fieldState: { error },
-    //           }) => (
-    //             <Input
-    //               className="font-medium text-sm my-1"
-    //               placeholder={"Phone"}
-    //               prefix={
-    //                 <Iconify
-    //                   icon={"ic:outline-phone"}
-    //                   className="text-text-light text-lg"
-    //                 />
-    //               }
-    //               size={"large"}
-    //               onChange={onChange}
-    //               onBlur={onBlur}
-    //               value={value}
-    //               status={error ? "error" : ""}
-    //               //   suffix={<ErrorSuffix error={error} />}
-    //             />
-    //           )}
-    //         />
-
-    //         {/* Email */}
-    //         <Label className="flex flex-row items-center gap-1 mt-2 my-1 text-text font-semibold">
-    //           Email
-    //         </Label>
-    //         <Controller
-    //           control={control}
-    //           name={"email"}
-    //           // rules={{ required: true }}
-    //           render={({
-    //             field: { onChange, onBlur, value },
-    //             fieldState: { error },
-    //           }) => (
-    //             <Input
-    //               className=" font-medium text-sm my-1"
-    //               prefix={
-    //                 <Iconify
-    //                   icon={"mdi-light:email"}
-    //                   className="text-text-light text-lg"
-    //                 />
-    //               }
-    //               placeholder={"example@gmail.com"}
-    //               size={"large"}
-    //               onChange={onChange}
-    //               onBlur={onBlur}
-    //               value={value}
-    //               status={error ? "error" : ""}
-    //               //   suffix={<ErrorSuffix error={error} />}
-    //             />
-    //           )}
-    //         />
-
-    //         {/* <div className="flex flex-row gap-2"> */}
-    //         <Label className="flex flex-row items-center gap-1 mt-2 my-1 text-text font-semibold">
-    //           Gender
-    //         </Label>
-    //         <Controller
-    //           control={control}
-    //           name={"gender"}
-    //           // rules={{ required: true }}
-    //           render={({
-    //             field: { onChange, onBlur, value },
-    //             fieldState: { error },
-    //           }) => (
-    //             <Segmented
-    //               block
-    //               placeholder={"Gender"}
-    //               size={"large"}
-    //               className="relative w-full  "
-    //               onChange={onChange}
-    //               onBlur={onBlur}
-    //               value={value}
-    //               options={[
-    //                 { value: "Male", label: "Male" },
-    //                 { value: "Female", label: "Female" },
-    //                 { value: "Non Binary", label: "Non Binary" },
-    //               ]}
-    //               onResize={undefined}
-    //               onResizeCapture={undefined}
-    //               // status={error ? "error" : ""}
-    //               // loading={isLoading}
-    //             />
-    //           )}
-    //         />
-    //         <Label className="flex flex-row items-center gap-1 mt-2 my-1 text-text font-semibold">
-    //           Date of Birth
-    //         </Label>
-    //         <Controller
-    //           control={control}
-    //           name={"dob"}
-    //           // rules={{ required: true }}
-    //           render={({
-    //             field: { onChange, onBlur, value },
-    //             fieldState: { error },
-    //           }) => (
-    //             <DatePicker
-    //               size="large"
-    //               placeholder="Date of Birth"
-    //               className="text-text-light w-full"
-    //               onChange={onChange}
-    //               onBlur={onBlur}
-    //               value={dayjs(value)}
-    //             />
-    //           )}
-    //         />
-    //         <Label className="flex flex-row items-center gap-1 mt-2 my-1 text-text font-semibold">
-    //           Curriculum Vitae
-    //         </Label>
-
-    //         <AntButton
-    //           icon={<Icon icon="basil:upload-outline" />}
-    //           className="flex flex-row items-center gap-1"
-    //         >
-    //           Click to Upload
-    //         </AntButton>
-
-    //         {/* </div> */}
-    //       </div>
-    //       <MuiDivider flexItem orientation="vertical" />
-
-    //       <div className="m-5 w-full">
-    //         <h1 className="text-xl font-bold text-text-light">
-    //           Payroll Information
-    //         </h1>
-    //         <div className="pt-3 text-text-light">
-    //           <Label className="flex flex-row items-center gap-1 mt-2 my-1 text-text font-semibold">
-    //             Work Hours
-    //           </Label>
-    //           <Controller
-    //             control={control}
-    //             name={"work_hour"}
-    //             // rules={{ required: true }}
-    //             render={({
-    //               field: { onChange, onBlur, value },
-    //               fieldState: { error },
-    //             }) => (
-    //               <Input
-    //                 className=" font-medium text-sm my-1"
-    //                 prefix={
-    //                   <Iconify
-    //                     icon={"iconamoon:clock-duotone"}
-    //                     className="text-text-light text-lg"
-    //                   />
-    //                 }
-    //                 placeholder={"8"}
-    //                 size={"large"}
-    //                 onChange={onChange}
-    //                 onBlur={onBlur}
-    //                 value={value}
-    //                 status={error ? "error" : ""}
-    //                 //   suffix={<ErrorSuffix error={error} />}
-    //               />
-    //             )}
-    //           />
-    //           <Label className="flex flex-row items-center gap-1 mt-2 my-1 text-text font-semibold">
-    //             Bank
-    //           </Label>
-    //           <Controller
-    //             control={control}
-    //             name={"bank"}
-    //             // rules={{ required: true }}
-    //             render={({
-    //               field: { onChange, onBlur, value },
-    //               fieldState: { error },
-    //             }) => (
-    //               <Input
-    //                 className=" font-medium text-sm my-1"
-    //                 prefix={
-    //                   <Iconify
-    //                     icon={"mingcute:bank-card-line"}
-    //                     className="text-text-light text-lg"
-    //                   />
-    //                 }
-    //                 placeholder={"Bank Details"}
-    //                 size={"large"}
-    //                 onChange={onChange}
-    //                 onBlur={onBlur}
-    //                 value={value}
-    //                 status={error ? "error" : ""}
-    //                 //   suffix={<ErrorSuffix error={error} />}
-    //               />
-    //             )}
-    //           />
-    //           <Label className="flex flex-row items-center gap-1 mt-2 my-1 text-text font-semibold">
-    //             Salary
-    //           </Label>
-    //           <Controller
-    //             control={control}
-    //             name={"salary"}
-    //             // rules={{ required: true }}
-    //             render={({
-    //               field: { onChange, onBlur, value },
-    //               fieldState: { error },
-    //             }) => (
-    //               <Input
-    //                 className=" font-medium text-sm my-1"
-    //                 prefix={
-    //                   <Iconify
-    //                     icon={"tabler:currency-taka"}
-    //                     className="text-text-light text-lg"
-    //                   />
-    //                 }
-    //                 placeholder={"8"}
-    //                 size={"large"}
-    //                 onChange={onChange}
-    //                 onBlur={onBlur}
-    //                 value={value}
-    //                 status={error ? "error" : ""}
-    //                 //   suffix={<ErrorSuffix error={error} />}
-    //               />
-    //             )}
-    //           />
-    //           <Button
-    //             variant="contained"
-    //             fullWidth
-    //             size="large"
-    //             type={"submit"}
-    //             className="mt-5 bg-slate-600"
-    //             disabled={isSubmitting}
-    //           >
-    //             Update
-    //           </Button>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </form>
-    // </>
+          <div className="flex flex-row items-center px-4">
+            <Link to={`/app/info/media/${mediaData?.data?.data?.id}`}>
+              <Avatar
+                variant="rounded"
+                src={mediaData?.data?.data?.display_picture}
+                {...stringAvatar(
+                  `${mediaData?.data?.data?.first_name} ${mediaData?.data?.data?.last_name}`
+                )}
+                className="md:w-[75px] md:h-[75px] w-[60px] h-[60px] rounded-2xl mt-1"
+              />
+            </Link>
+            <span className="flex flex-col px-2">
+              <Link to={`/app/info/media/${mediaData?.data?.data?.id}`}>
+                <p className="text-lg font-bold text-text-light">{`${mediaData?.data?.data?.first_name} ${mediaData?.data?.data?.last_name}`}</p>
+              </Link>
+              <p className="text-sm font-medium text-text-light">
+                {mediaData?.data?.data?.gender}
+              </p>
+              <p className="text-sm font-medium text-text-light">
+                <b>ID No:</b> {mediaData?.data?.data?.id}
+                {mediaData?.data?.data?.first_name?.[0]}
+              </p>
+            </span>
+          </div>
+          <div className="mx-4">
+            <Label className="mt-2 text-text-light font-semibold">
+              Commision
+            </Label>
+            {/* <Controller
+              control={control}
+              name={"media_commision"}
+              // rules={{ required: true }}
+              render={({
+                field: { onChange, onBlur, value },
+                fieldState: { error },
+              }) => ( */}
+            <Input
+              disabled
+              className="font-medium text-sm my-1"
+              prefix={
+                <Iconify
+                  icon={"mdi:percent-box"}
+                  className="text-text-light text-lg"
+                />
+              }
+              placeholder={"Enter percent rate"}
+              size={"large"}
+              // onChange={onChange}
+              // onBlur={onBlur}
+              value={propertyInfo?.media_commision} /*needs to change*/
+              // status={error ? "error" : ""}
+              suffix={"%"}
+            />
+            {/* )}
+            /> */}
+          </div>
+          <Divider
+            orientation="left"
+            className="text-lg font-semibold text-text pt-4"
+          >
+            Photos
+          </Divider>
+          <div className="mx-4">
+            <Avatar
+              src={""}
+              variant="rounded"
+              className="relative rounded-lg bg-slate-300 min-w-[80px] min-h-[80px] "
+            >
+              <Iconify
+                icon={"mdi:image-text"}
+                className="text-8xl text-slate-50"
+              />
+            </Avatar>
+          </div>
+        </div>
+      </div>
+      {/* </form> */}
+    </>
   );
 };
 

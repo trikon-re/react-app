@@ -20,7 +20,6 @@ const Create: React.FC = () => {
 	const { handleSubmit, control, reset } = useForm({
 		// resolver: joiResolver(loginResolver),
 	});
-
 	const onSubmit = async (data: any) => {
 		messageApi.open({
 			type: "loading",

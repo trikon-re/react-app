@@ -48,16 +48,8 @@ const Navigator: React.FC = () => {
           <>
             <Icon icon="clarity:id-badge-solid" className="text-xl" />
             <p>
-              employees /
-              {data?.data?.data?.role ? (
-                <>
-                  {" "}
-                  {data?.data?.data?.role?.id}
-                  {data?.data?.data?.role?.name?.[0]}-{params.id}
-                </>
-              ) : (
-                "No Role Assigned"
-              )}
+              employees / {data?.data?.data?.role?.id}
+              {data?.data?.data?.role?.name?.[0]}-{params.id}
             </p>
           </>
 
