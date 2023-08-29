@@ -381,6 +381,26 @@ const Create: React.FC = () => {
 						<div className="w-full">
 							<Divider orientation="left">Payroll Information</Divider>
 							<div className="px-3">
+								<Label className="mt-2 mb-1">Hired Date</Label>
+								<Controller
+									control={control}
+									name={"hired_date"}
+									defaultValue={dayjs()}
+									// rules={{ required: true }}
+									render={({
+										field: { onChange, onBlur, value },
+										fieldState: { error },
+									}) => (
+										<DatePicker
+											size="large"
+											className={"w-full"}
+											placeholder="Hired Date"
+											onChange={onChange}
+											onBlur={onBlur}
+											value={dayjs(value)}
+										/>
+									)}
+								/>
 								<Label
 									// isRequired
 									className="mt-2 mb-1"

@@ -94,7 +94,7 @@ const Overview: React.FC = () => {
 									</IconButton>
 								</p>
 								<p className="text-sm font-semibold -mt-4 text-text-light">
-									Level 2 media
+									Level 1 Media
 								</p>
 
 								<Tag
