@@ -9,7 +9,6 @@ import * as dayjs from "dayjs";
 import Label from "@components/Label";
 import { Link } from "react-router-dom";
 import { useCreateMedia } from "@/queries/media";
-import Iconify from "@components/iconify";
 
 const Create: React.FC = () => {
   const [messageApi, contextHolder] = message.useMessage();

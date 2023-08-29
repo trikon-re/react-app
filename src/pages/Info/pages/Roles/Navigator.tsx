@@ -3,8 +3,8 @@ import React from "react";
 import { Icon } from "@iconify/react";
 
 import type { MenuProps } from "antd";
-import { Menu, Tag } from "antd";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Menu } from "antd";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ROUTES } from "./routes/paths";
 
 const items: MenuProps["items"] = [
@@ -18,7 +18,7 @@ const items: MenuProps["items"] = [
 const Navigator: React.FC = () => {
   // To get the current location pathname
   let location = useLocation();
-  const params = useParams();
+  // const params = useParams();
 
   // To route
   const navigate = useNavigate();
