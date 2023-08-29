@@ -67,9 +67,16 @@ const EmployeeCard: React.FC<{ employee: IEmployees }> = ({ employee }) => {
       <ListItemText
         primary={
           <>
-            <Link to={`/app/info/employee/${employee.id}`}>
-              <p className="text-lg font-medium">{`${employee?.first_name} ${employee?.last_name}`}</p>
-            </Link>
+            <div className="flex flex-row items-center">
+              <Link to={`/app/info/employee/${employee.id}`}>
+                <p className="text-lg font-medium">{`${employee?.first_name} ${employee?.last_name}`}</p>
+              </Link>
+              <Icon
+                className="text-xl"
+                color={employee?.is_active ? "#1a946e" : "grey"}
+                icon="octicon:dot-fill-16"
+              />
+            </div>
           </>
         }
         secondary={

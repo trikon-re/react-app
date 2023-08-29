@@ -105,7 +105,9 @@ const Overview: React.FC = () => {
                   </IconButton>
                 </p>
                 <p className="text-sm font-medium text-text-light -mt-3">
-                  {employeeInfo?.role?.name}
+                  {employeeInfo?.role
+                    ? employeeInfo?.role?.name
+                    : "No Role Assigned"}
                   <br />
                   <span>@{employeeInfo?.username}</span>
                 </p>
