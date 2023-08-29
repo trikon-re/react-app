@@ -13,7 +13,7 @@ export const useGetMedia = (params: any) => {
 };
 
 const createMedia = (data: ICreateMedia) => {
-  return instance.post("/employees", data);
+  return instance.post("/media", data);
 };
 
 export const useCreateMedia = () => {

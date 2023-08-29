@@ -21,7 +21,7 @@ const MediaCard: React.FC<{ media: IMedia }> = ({ media }) => {
   const onDelete = async (fileName: number) => {
     message.open({
       type: "loading",
-      content: "Deleting Photo..",
+      content: "Deleting Media..",
       duration: 0,
     });
     const res = await handleResponse(() => deletemedia(media.id));

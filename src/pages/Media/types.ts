@@ -3,6 +3,7 @@ export type IMedia = {
   first_name: string;
   last_name: string;
   gender: string;
+  dob: string;
   display_picture: string;
   email?: string;
   phone: "number";
