@@ -80,7 +80,7 @@ const MediaCard: React.FC<{ media: IMedia }> = ({ media }) => {
             <>
               <div className="flex flex-row items-center gap-1 py-1.5  text-text-light">
                 <Icon className="text-lg" icon="material-symbols:person-pin" />
-                <p className="text-sm font-semibold">Level 2 Media</p>
+                <p className="text-sm font-semibold">Level 1 Media</p>
               </div>
               <div className="flex md:flex-row flex-col md:items-center md:gap-4  text-text-light">
                 <div className="flex flex-row items-center gap-1">

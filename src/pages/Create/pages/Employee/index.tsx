@@ -170,6 +170,7 @@ const Create: React.FC = () => {
               <Controller
                 control={control}
                 name={"gender"}
+                defaultValue={"Non Binary"}
                 rules={{ required: true }}
                 render={({
                   field: { onChange, onBlur, value },
@@ -200,6 +201,7 @@ const Create: React.FC = () => {
               <Controller
                 control={control}
                 name={"dob"}
+                defaultValue={dayjs()}
                 // rules={{ required: true }}
                 render={({
                   field: { onChange, onBlur, value },

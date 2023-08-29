@@ -47,7 +47,7 @@ const Create: React.FC = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col md:flex-row items-center justify-between max-w-5xl mx-auto my-2 px-5 py-4 text-text">
           <h1 className="font-bold text-3xl">Create New Media</h1>
-          <Link to={"/app/Media"} className="font-bold text-sm underline">
+          <Link to={"/app/media"} className="font-bold text-sm underline">
             View All Medias
           </Link>
         </div>
@@ -151,6 +151,7 @@ const Create: React.FC = () => {
                 control={control}
                 name={"gender"}
                 rules={{ required: true }}
+                defaultValue={"Non Binary"}
                 render={({
                   field: { onChange, onBlur, value },
                   fieldState: { error },
@@ -182,7 +183,8 @@ const Create: React.FC = () => {
               <Controller
                 control={control}
                 name={"dob"}
-                // rules={{ required: true }}
+                // rules={{}}
+                defaultValue={dayjs()}
                 render={({
                   field: { onChange, onBlur, value },
                   fieldState: { error },
@@ -201,31 +203,6 @@ const Create: React.FC = () => {
           </div>
           <MuiDivider flexItem orientation="vertical" className="mt-7" />
           <div className="w-full">
-            <Divider orientation="left">Payroll Information</Divider>
-            <div className="px-3">
-              <Label className="mt-2 mb-1">Media Commission</Label>
-              <Controller
-                control={control}
-                name={"commission"}
-                rules={{ required: true }}
-                render={({
-                  field: { onChange, onBlur, value },
-                  fieldState: { error },
-                }) => (
-                  <Input
-                    placeholder={"Enter Commission"}
-                    addonAfter={<Iconify icon={"mdi:percent-box"} />}
-                    size={"large"}
-                    onChange={onChange}
-                    onBlur={onBlur}
-                    value={value}
-                    status={error ? "error" : ""}
-                    //   suffix={<ErrorSuffix error={error} />}
-                  />
-                )}
-              />
-            </div>
-
             <div className="w-full">
               <Divider orientation="left">Address Details</Divider>
               <div className="px-3">
