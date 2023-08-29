@@ -10,12 +10,13 @@ import * as dayjs from "dayjs";
 import Label from "@components/Label";
 import { Link } from "react-router-dom";
 import Iconify from "@components/iconify";
+import useRole from "@/hooks/useRole";
 
 const Create: React.FC = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const { mutateAsync: createEmployee, isLoading: employeeCreating } =
     useCreateEmployee();
-
+  const { role, isRoleLoading, searchRole } = useRole();
   const { handleSubmit, control, reset } = useForm({
     // resolver: joiResolver(loginResolver),
   });
@@ -196,7 +197,7 @@ const Create: React.FC = () => {
               <Label className="mt-2 mb-1">Date of Birth</Label>
               <Controller
                 control={control}
-                name={"cv"}
+                name={"dob"}
                 // rules={{ required: true }}
                 render={({
                   field: { onChange, onBlur, value },
@@ -212,10 +213,10 @@ const Create: React.FC = () => {
                   />
                 )}
               />
-              <Label className="mt-2 mb-1">Curriculum Vitae</Label>
+              {/* <Label className="mt-2 mb-1">Curriculum Vitae</Label>
               <Controller
                 control={control}
-                name={"dob"}
+                name={"cv"}
                 // rules={{ required: true }}
                 render={({
                   field: { onChange, onBlur, value },
@@ -231,7 +232,7 @@ const Create: React.FC = () => {
                     value={value}
                   />
                 )}
-              />
+              /> */}
 
               <Divider orientation="left">Address Details</Divider>
 
@@ -249,8 +250,8 @@ const Create: React.FC = () => {
                   field: { onChange, onBlur, value },
                   fieldState: { error },
                 }) => (
-                  <Input
-                    placeholder={"Enter Address Line 1"}
+                  <Input.TextArea
+                    placeholder={"Enter Address..."}
                     size={"large"}
                     onChange={onChange}
                     onBlur={onBlur}
@@ -268,7 +269,7 @@ const Create: React.FC = () => {
             <div className="px-3">
               <Controller
                 control={control}
-                name={"new_password"}
+                name={"password"}
                 render={({
                   field: { onChange, onBlur, value },
                   fieldState: { error },
@@ -305,7 +306,7 @@ const Create: React.FC = () => {
               />
               <Controller
                 control={control}
-                name={"role"}
+                name={"role_id"}
                 render={({
                   field: { onChange, onBlur, value },
                   fieldState: { error },
@@ -336,17 +337,11 @@ const Create: React.FC = () => {
                       className="w-full"
                       placeholder={"Select a Role..."}
                       suffixIcon={<Iconify icon={"mingcute:search-3-line"} />}
-                      //   onChange={handleChange}
-                      //   options={[
-                      //     { value: "jack", label: "Jack" },
-                      //     { value: "lucy", label: "Lucy" },
-                      //     { value: "Yiminghe", label: "yiminghe" },
-                      //     {
-                      //       value: "disabled",
-                      //       label: "Disabled",
-                      //       disabled: true,
-                      //     },
-                      //   ]}
+                      onChange={onChange}
+                      options={role}
+                      onSearch={searchRole}
+                      loading={isRoleLoading}
+                      status={error ? "error" : ""}
                     />
                   </>
                 )}

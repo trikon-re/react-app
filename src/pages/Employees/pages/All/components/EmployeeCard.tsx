@@ -10,10 +10,30 @@ import {
 import { IEmployees } from "@pages/Employees/types";
 import { Dropdown, MenuProps, Space } from "antd";
 import { Link, useNavigate } from "react-router-dom";
+import handleResponse from "@/utilities/handleResponse";
+import { useDeleteEmployee } from "@/queries/employees";
+import { message } from "@components/antd/message";
 
 const EmployeeCard: React.FC<{ employee: IEmployees }> = ({ employee }) => {
   const navigate = useNavigate();
+  const { mutateAsync: deleteEmployee } = useDeleteEmployee();
 
+  const onDelete = async (fileName: number) => {
+    message.open({
+      type: "loading",
+      content: "Deleting Photo..",
+      duration: 0,
+    });
+    const res = await handleResponse(() => deleteEmployee(employee.id));
+    message.destroy();
+    if (res.status) {
+      message.success("Employee deleted successfully!");
+      return true;
+    } else {
+      message.error(res.message);
+      return false;
+    }
+  };
   const items: MenuProps["items"] = [
     {
       label: "View details",
@@ -23,6 +43,7 @@ const EmployeeCard: React.FC<{ employee: IEmployees }> = ({ employee }) => {
     },
     {
       label: "Delete",
+      onClick: () => onDelete(employee.id),
       key: 2,
       icon: <Icon icon="mi:delete" className="text-xl" />,
       danger: true,
