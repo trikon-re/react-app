@@ -34,7 +34,7 @@ const Navigator: React.FC = () => {
   };
 
   const { data } = useGetMediaById(params.id);
-  console.log(data);
+  console.log(params.id);
 
   return (
     <>
@@ -43,16 +43,12 @@ const Navigator: React.FC = () => {
           <>
             <Icon icon="clarity:id-badge-solid" className="text-xl" />
             <p>
-              Media /{" "}
-              {data?.data?.data?.id ? (
-                <>
-                  {" "}
-                  {data?.data?.data?.id}
-                  {data?.data?.data?.name?.[0]}-{params.id}
-                </>
-              ) : (
-                "No Role Assigned"
-              )}
+              Media /
+              <>
+                {" "}
+                {data?.data?.data?.id}
+                {data?.data?.data?.first_name?.[0]}
+              </>
             </p>
           </>
 
