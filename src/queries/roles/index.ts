@@ -19,3 +19,17 @@ export const useCreateRole = () => {
     onSuccess: () => queryClient.invalidateQueries(["get-all-roles"]),
   });
 };
+
+const deleteRole = (id: number) => {
+  return instance.delete(`/roles/${id}`);
+};
+
+export const useDeleteRole = () => {
+  const query = useQueryClient();
+  return useMutation(deleteRole, {
+    onSuccess: () => {
+      query.invalidateQueries(["get-all-roles"]);
+      query.invalidateQueries(["get-role-by-id"]);
+    },
+  });
+};

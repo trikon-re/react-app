@@ -5,9 +5,30 @@ import { Dropdown, MenuProps, Space, Tag } from "antd";
 import React from "react";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import { useDeleteRole } from "@/queries/roles";
+import handleResponse from "@/utilities/handleResponse";
+import { message } from "@components/antd/message";
 
 const RoleCard: React.FC<{ role: IRoles }> = ({ role }) => {
   const navigate = useNavigate();
+  const { mutateAsync: deleteRole } = useDeleteRole();
+
+  const onDelete = async (fileName: number) => {
+    message.open({
+      type: "loading",
+      content: "Deleting Role..",
+      duration: 0,
+    });
+    const res = await handleResponse(() => deleteRole(role.id));
+    message.destroy();
+    if (res.status) {
+      message.success("Role deleted successfully!");
+      return true;
+    } else {
+      message.error(res.message);
+      return false;
+    }
+  };
 
   const items: MenuProps["items"] = [
     {
@@ -18,7 +39,7 @@ const RoleCard: React.FC<{ role: IRoles }> = ({ role }) => {
     },
     {
       label: "Delete",
-      // onClick: () => onDelete(employee.id),
+      onClick: () => onDelete(role.id),
       key: 2,
       icon: <Icon icon="mi:delete" className="text-xl" />,
       danger: true,
@@ -66,14 +87,14 @@ const RoleCard: React.FC<{ role: IRoles }> = ({ role }) => {
         />
 
         <div className="flex flex-row md:items-center  md:gap-4 gap-2 py-2 md:py-0 ">
-          {/* Assigned employee list */}
+          {/* Assigned R0le list */}
           <div className="flex flex-row  gap-2">
             <Icon
               icon="ic:twotone-person-pin"
               className="text-xl text-text-light"
             />
             <p className="text-sm font-semibold text-text-light">
-              {`${role?.total_employees}`} Employees
+              {`${role?.total_employees}`} Roles
             </p>
           </div>
 
