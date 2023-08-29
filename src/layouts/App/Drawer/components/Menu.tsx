@@ -97,68 +97,81 @@ const items: MenuItem[] = [
 				],
 				true
 			),
-			getItem(
-				"Properties",
-				"/properties",
-				<Icon icon={"mdi:building"} />,
-				[
-					getItem(
-						"Overview",
-						"/app/properties/overview",
-						<Icon icon={"icon-park-outline:view-grid-list"} />
-					),
-					getItem(
-						"Create New Property",
-						"/app/properties/create",
-						<Icon icon={"bi:building-add"} />
-					),
-					getItem(
-						"List of Properties",
-						"/app/properties/all",
-						<Icon icon={"fluent:data-funnel-24-regular"} />,
-						[
-							getItem(
-								"All Properties",
-								"/app/properties",
-								<Icon icon={"bx:buildings"} />
-							),
-							getItem(
-								"New Properties",
-								"/app/properties/all?date=last-7-days",
-								<Icon icon={"ic:outline-new-releases"} />
-							),
-							getItem(
-								"Available Properties",
-								"/app/properties/all?status=available",
-								<Icon icon={"bi:building"} />
-							),
-							getItem(
-								"Sold Properties",
-								"/app/properties/all?status=sold",
-								<Icon icon={"bi:building-check"} />
-							),
-							getItem(
-								"Canceled Properties",
-								"/app/properties/all?status=canceled",
-								<Icon icon={"bi:building-x"} />
-							),
-						]
-					),
-					getItem("Trash", "/properties/trash", <Icon icon={"gg:trash"} />),
-					getItem(
-						"Reports",
-						"/app/properties/reports",
-						<Icon icon={"tabler:report"} />,
-						[]
-					),
-				],
-				true
-			),
+			getItem("Properties", "/properties", <Icon icon={"mdi:building"} />, [
+				getItem(
+					"Overview",
+					"/app/properties/overview",
+					<Icon icon={"icon-park-outline:view-grid-list"} />,
+					undefined,
+					true
+				),
+				getItem(
+					"Create New Property",
+					"/app/create/property",
+					<Icon icon={"bi:building-add"} />
+				),
+				getItem(
+					"List of Properties",
+					"/app/properties/all",
+					<Icon icon={"fluent:data-funnel-24-regular"} />,
+					[
+						getItem(
+							"All Properties",
+							"/app/properties",
+							<Icon icon={"bx:buildings"} />
+						),
+						getItem(
+							"New Properties",
+							"/app/properties?date=last-7-days",
+							<Icon icon={"ic:outline-new-releases"} />,
+							undefined,
+							true
+						),
+						getItem(
+							"Available Properties",
+							"/app/properties?status=available",
+							<Icon icon={"bi:building"} />,
+							undefined,
+							true
+						),
+						getItem(
+							"Sold Properties",
+							"/app/properties?status=sold",
+							<Icon icon={"bi:building-check"} />,
+							undefined,
+							true
+						),
+						getItem(
+							"Canceled Properties",
+							"/app/properties?status=canceled",
+							<Icon icon={"bi:building-x"} />,
+							undefined,
+							true
+						),
+					]
+				),
+				getItem(
+					"Trash",
+					"/properties/trash",
+					<Icon icon={"gg:trash"} />,
+					undefined,
+					true
+				),
+				getItem(
+					"Reports",
+					"/app/properties/reports",
+					<Icon icon={"tabler:report"} />,
+					[],
+					true
+				),
+			]),
 			getItem("Media", "/media", <Icon icon={"radix-icons:dashboard"} />, [
 				getItem(
 					"Overview",
 					"/app/media/overview",
-					<Icon icon={"icon-park-outline:view-grid-list"} />
+					<Icon icon={"icon-park-outline:view-grid-list"} />,
+					undefined,
+					true
 				),
 				getItem(
 					"Create New Media",
@@ -177,26 +190,33 @@ const items: MenuItem[] = [
 						),
 						getItem(
 							"Property Media",
-							"/app/media/all?linked_to=property",
-							<Icon icon={"radix-icons:dashboard"} />
+							"/app/media?linked_to=property",
+							<Icon icon={"radix-icons:dashboard"} />,
+							undefined,
+							true
 						),
 						getItem(
 							"Lead Media",
-							"/app/media/all?linked_to=lead",
-							<Icon icon={"radix-icons:dashboard"} />
+							"/app/media?linked_to=lead",
+							<Icon icon={"radix-icons:dashboard"} />,
+							undefined,
+							true
 						),
 					]
 				),
 				getItem(
 					"Trash",
 					"/app/media/trash",
-					<Icon icon={"radix-icons:dashboard"} />
+					<Icon icon={"radix-icons:dashboard"} />,
+					undefined,
+					true
 				),
 				getItem(
 					"Reports",
 					"/media/reports",
 					<Icon icon={"radix-icons:dashboard"} />,
-					[]
+					[],
+					true
 				),
 			]),
 		],
@@ -217,7 +237,7 @@ const items: MenuItem[] = [
 					),
 					getItem(
 						"List of Employees",
-						"/app/employees/all",
+						"/app/employees",
 						<Icon icon={"radix-icons:dashboard"} />,
 						[
 							getItem(
@@ -227,25 +247,33 @@ const items: MenuItem[] = [
 							),
 							getItem(
 								"New Employees",
-								"/app/employees/all?join_date<7d",
-								<Icon icon={"radix-icons:dashboard"} />
+								"/app/employees?join_date<7d",
+								<Icon icon={"radix-icons:dashboard"} />,
+								undefined,
+								true
 							),
 							getItem(
 								"Active Employees",
-								"/app/employees/all?active=true",
-								<Icon icon={"radix-icons:dashboard"} />
+								"/app/employees?active=true",
+								<Icon icon={"radix-icons:dashboard"} />,
+								undefined,
+								true
 							),
 							getItem(
 								"Suspended Employees",
-								"/app/employees/all?is_active=false",
-								<Icon icon={"radix-icons:dashboard"} />
+								"/app/employees?is_active=false",
+								<Icon icon={"radix-icons:dashboard"} />,
+								undefined,
+								true
 							),
 						]
 					),
 					getItem(
 						"Trash",
 						"/app/employees/trash",
-						<Icon icon={"radix-icons:dashboard"} />
+						<Icon icon={"radix-icons:dashboard"} />,
+						undefined,
+						true
 					),
 				]
 			),
@@ -257,7 +285,7 @@ const items: MenuItem[] = [
 				),
 				getItem(
 					"List of Roles",
-					"/app/roles/all",
+					"/app/roles",
 					<Icon icon={"radix-icons:dashboard"} />,
 					[
 						getItem(
@@ -267,25 +295,33 @@ const items: MenuItem[] = [
 						),
 						getItem(
 							"New Roles",
-							"/app/roles/all?join_date<7d",
-							<Icon icon={"radix-icons:dashboard"} />
+							"/app/roles?join_date<7d",
+							<Icon icon={"radix-icons:dashboard"} />,
+							undefined,
+							true
 						),
 						getItem(
 							"Active Roles",
-							"/app/roles/all?active=true",
-							<Icon icon={"radix-icons:dashboard"} />
+							"/app/roles?active=true",
+							<Icon icon={"radix-icons:dashboard"} />,
+							undefined,
+							true
 						),
 						getItem(
 							"Suspended Roles",
-							"/app/roles/all?is_active=false",
-							<Icon icon={"radix-icons:dashboard"} />
+							"/app/roles?is_active=false",
+							<Icon icon={"radix-icons:dashboard"} />,
+							undefined,
+							true
 						),
 					]
 				),
 				getItem(
 					"Trash",
 					"/app/roles/trash",
-					<Icon icon={"radix-icons:dashboard"} />
+					<Icon icon={"radix-icons:dashboard"} />,
+					undefined,
+					true
 				),
 			]),
 		],

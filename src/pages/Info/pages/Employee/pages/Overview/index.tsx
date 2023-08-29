@@ -18,7 +18,9 @@ import { stringAvatar } from "@/utilities/stringAvatar";
 import handleResponse from "@/utilities/handleResponse";
 import { message } from "@components/antd/message";
 import Iconify from "@components/iconify";
-import * as dayjs from "dayjs";
+
+import dayjs from "dayjs";
+
 import { Button as AntButton } from "antd";
 
 const Overview: React.FC = () => {
