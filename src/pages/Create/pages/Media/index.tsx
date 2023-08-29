@@ -4,11 +4,12 @@ import handleResponse from "@/utilities/handleResponse";
 import { Controller, useForm } from "react-hook-form";
 import { message } from "@components/antd/message";
 import { Button, Divider as MuiDivider } from "@mui/material";
-import { DatePicker, Divider, Input, Segmented, Select } from "antd";
+import { DatePicker, Divider, Input, Segmented } from "antd";
 import * as dayjs from "dayjs";
 import Label from "@components/Label";
 import { Link } from "react-router-dom";
 import { useCreateMedia } from "@/queries/media";
+import Iconify from "@components/iconify";
 
 const Create: React.FC = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -50,7 +51,7 @@ const Create: React.FC = () => {
             View All Medias
           </Link>
         </div>
-        <div className="flex flex-row container mx-auto max-w-5xl">
+        <div className="flex md:flex-row flex-col container mx-auto max-w-5xl">
           <div className="w-full">
             <Divider orientation="left">Basic Info</Divider>
             <div className="px-3">
@@ -201,7 +202,7 @@ const Create: React.FC = () => {
           <MuiDivider flexItem orientation="vertical" className="mt-7" />
           <div className="w-full">
             <Divider orientation="left">Payroll Information</Divider>
-            {/* <div className="px-3">
+            <div className="px-3">
               <Label className="mt-2 mb-1">Media Commission</Label>
               <Controller
                 control={control}
@@ -223,7 +224,7 @@ const Create: React.FC = () => {
                   />
                 )}
               />
-            </div> */}
+            </div>
 
             <div className="w-full">
               <Divider orientation="left">Address Details</Divider>

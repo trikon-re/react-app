@@ -84,7 +84,7 @@ const Overview: React.FC = () => {
       <form onSubmit={handleSubmit(onValid)}>
         <div className="flex md:flex-row flex-col container mx-auto max-w-5xl">
           <div className="w-full p-3">
-            <div className="flex flex-row">
+            <div className="flex flex-row items-center gap-2">
               <Avatar
                 variant="rounded"
                 src={employeeInfo?.display_picture}
@@ -105,7 +105,7 @@ const Overview: React.FC = () => {
                   </IconButton>
                 </p>
                 <p className="text-sm font-medium text-text-light -mt-3">
-                  {employeeInfo?.role?.name}
+                  {employeeInfo?.role?.name || "No role assigned"}
                   <br />
                   <span>@{employeeInfo?.username}</span>
                 </p>
