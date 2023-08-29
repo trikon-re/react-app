@@ -4,12 +4,7 @@ import { Input, Segmented, Tag, DatePicker } from "antd";
 import React from "react";
 import { useParams } from "react-router-dom";
 import { Controller, FieldValues, useForm } from "react-hook-form";
-import {
-  Avatar,
-  Button,
-  IconButton,
-  Divider as MuiDivider,
-} from "@mui/material";
+import { Avatar, Button, IconButton } from "@mui/material";
 import Label from "@components/Label";
 import Iconify from "@components/iconify";
 import * as dayjs from "dayjs";
