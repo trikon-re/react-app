@@ -1,15 +1,15 @@
 import React from "react";
 
-import AuthContext from "@/contexts/AuthContext";
 // import { loginResolver } from './resolver';
 import { Controller, FieldValues, useForm } from "react-hook-form";
 import { Checkbox, Input, Typography } from "antd";
 import { Icon } from "@iconify/react";
 import { Button } from "@mui/material";
 import logo from "/assets/logo.png";
+import useAuth from "@/hooks/useAuth";
 
-const Login = () => {
-	const { login, isLoginLoading } = React.useContext(AuthContext);
+const Login: React.FC = () => {
+	const { login, isLoginLoading } = useAuth();
 
 	const {
 		// reset,

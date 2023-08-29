@@ -6,14 +6,18 @@ import { VitePWA } from "vite-plugin-pwa";
 // https://vitejs.dev/config/
 export default defineConfig({
 	optimizeDeps: {
-		include: ["antd", "lodash", "moment"],
+		include: ["antd", "lodash", "moment", "@mui/material"],
 	},
 	server: {
 		port: 3000,
 		open: "/",
 	},
+	preview: {
+		port: 3010,
+	},
 	build: {
 		outDir: "build",
+		cssCodeSplit: true,
 	},
 	plugins: [
 		react(),
@@ -24,9 +28,9 @@ export default defineConfig({
 			devOptions: {
 				enabled: false, // Enable to get pwa in development mode
 			},
-			// workbox: {
-			// 	cleanupOutdatedCaches: true,
-			// },
+			workbox: {
+				cleanupOutdatedCaches: true,
+			},
 		}),
 	],
 });
