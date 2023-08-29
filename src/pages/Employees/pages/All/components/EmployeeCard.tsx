@@ -73,8 +73,8 @@ const EmployeeCard: React.FC<{ employee: IEmployees }> = ({ employee }) => {
               </Link>
               <Icon
                 className="text-xl"
-                color={employee?.is_active ? "#1a946e" : "grey"}
-                icon="octicon:dot-fill-16"
+                color={employee?.verified_at ? "#087890" : "grey"}
+                icon="ic:round-verified"
               />
             </div>
           </>
