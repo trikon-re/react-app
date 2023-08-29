@@ -1,18 +1,23 @@
-import { Icon } from "@iconify/react";
-import { IconButton, ListItemButton, ListItemText } from "@mui/material";
-import { IRoles } from "@pages/Roles/types";
-import { Dropdown, MenuProps, Space, Tag } from "antd";
 import React from "react";
-import moment from "moment";
-import { useNavigate } from "react-router-dom";
+import { stringAvatar } from "@/utilities/stringAvatar";
+import { Icon } from "@iconify/react";
+import {
+  Avatar,
+  IconButton,
+  ListItemButton,
+  ListItemText,
+} from "@mui/material";
+import { Dropdown, MenuProps, Space, Tag } from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import { IProperty } from "@pages/Properties/types";
 
-const PropertyCard: React.FC<{ role: IRoles }> = ({ role }) => {
+const PropertyCard: React.FC<{ property: IProperty }> = ({ property }) => {
   const navigate = useNavigate();
 
   const items: MenuProps["items"] = [
     {
       label: "View details",
-      onClick: () => navigate(`/app/info/role/${role.id}`),
+      onClick: () => navigate(`/app/info/property/${property.id}`),
       key: 1,
       icon: <Icon icon="gg:details-more" className="text-xl" />,
     },
@@ -24,81 +29,148 @@ const PropertyCard: React.FC<{ role: IRoles }> = ({ role }) => {
       danger: true,
     },
   ];
+  console.log(property);
   return (
     <ListItemButton
-      className="hover:bg-slate-50 rounded-lg py-2  my-2 overflow-hidden md:items-center items-start gap-4"
+      className="hover:bg-[#e6f0f8] rounded-lg py-2 px-2 my-1 overflow-hidden items-start md:items-center gap-4"
       disableRipple
       disableTouchRipple
     >
-      {/* <div className="flex flex-row flex-1 md:flex-row md:items-center items-start justify-between"> */}
-      <div className="grid md:grid-cols-3 grid-cols-1 justify-between items-center flex-1">
-        {/* Admin name */}
-        <ListItemText
-          primary={
-            <div className="flex flex-row gap-2 items-center ">
-              <p className="text-lg font-medium">{role?.name}</p>
-              <Tag color={`${role?.is_active ? "green" : "red"}`}>
-                {role?.is_active ? "active" : "inactive"}
-              </Tag>
-            </div>
-          }
-          secondary={
-            <>
-              {role?.prefix ? (
-                <p className="text-sm font-semibold text-text-light uppercase">
-                  @{role?.prefix}
-                </p>
-              ) : (
-                ""
+      <div className="grid md:grid-cols-2 grid-cols-1 items-center flex-1">
+        <div className="flex flex-row items-center flex-1">
+          <Link to={`/app/info/property/${property.id}`}>
+            <Avatar
+              variant="rounded"
+              // src={property?.display_picture}
+              {...stringAvatar(
+                `${property?.["address.line1"]} ${property?.["address.line1"]}`
               )}
-              <p className="text-sm font-medium my-0.5">{role?.description}</p>
-            </>
-          }
-          className="p-0 m-0 grow-0 flex-0"
-          primaryTypographyProps={{
-            className: "text-xl font-medium",
-          }}
-          secondaryTypographyProps={{
-            variant: "caption",
-            className: "w-full",
-          }}
-          key={role?.id}
-        />
-
-        <div className="flex flex-row md:items-center  md:gap-4 gap-2 py-2 md:py-0 ">
-          {/* Assigned employee list */}
-          <div className="flex flex-row  gap-2">
-            <Icon
-              icon="ic:twotone-person-pin"
-              className="text-xl text-text-light"
+              className="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-md mr-2"
             />
-            <p className="text-sm font-semibold text-text-light">
-              {`${role?.total_employees}`} Employees
-            </p>
-          </div>
-
-          {/* Assigned permission list */}
-          <div className="flex flex-row gap-2">
-            <Icon
-              icon="fluent-mdl2:permissions"
-              className="text-md text-text-light"
-            />
-            <p className="text-sm font-semibold text-text-light">
-              {`${role?.total_permissions}`} Permissions
-            </p>
-          </div>
+          </Link>
+          <ListItemText
+            primary={
+              <>
+                <div className="flex flex-row jus gap-3">
+                  <div className="flex flex-row items-center">
+                    {property?.type === "FLAT" ? (
+                      <>
+                        <Icon
+                          className="text-xl"
+                          icon={"fluent:building-20-filled"}
+                        />
+                      </>
+                    ) : property?.type === "LAND" ? (
+                      <>
+                        <Icon className="text-xl" icon={"mdi:island"} />
+                      </>
+                    ) : (
+                      ""
+                    )}
+                    <p className="text-sm font-semibold ">{property?.type}</p>
+                  </div>
+                  <div className="flex flex-row items-center gap-1">
+                    {property?.size ? (
+                      <>
+                        <Icon
+                          className="text-xl "
+                          icon={"fluent:slide-size-20-regular"}
+                        />
+                        <p className="text-sm font-semibold">
+                          {property?.size}
+                        </p>
+                        <p className="text-sm font-semibold lowercase ">
+                          {property?.size_unit}
+                        </p>
+                      </>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  <Tag
+                    color="#76C6D1"
+                    className="rounded-xl w-fit text-center px-4"
+                  >
+                    {property?.type?.[0]}-{property?.id}
+                  </Tag>
+                </div>
+              </>
+            }
+            secondary={
+              <>
+                {property?.media_id ? (
+                  <div className="flex flex-row items-center gap-1 my-2">
+                    <Icon
+                      className="text-xl text-text-light"
+                      icon={"tabler:address-book"}
+                    />
+                    <p className="text-sm font-semibold">
+                      {property?.media_id}
+                    </p>
+                  </div>
+                ) : (
+                  <p className="text-sm font-semibold">No Media Assigned</p>
+                )}
+                <div className="flex flex-row items-center gap-4">
+                  <div className="flex flex-row items-center gap-1">
+                    <Icon
+                      className="text-xl text-text-light"
+                      icon="solar:compass-big-bold"
+                    />
+                    <p className="text-sm font-semibold text-text-light">
+                      {property?.["flat.facing_side"]}
+                    </p>
+                  </div>
+                  <div className="flex flex-row items-center gap-1">
+                    <Icon
+                      className="text-xl text-text-light"
+                      icon="entypo:address"
+                    />
+                    <p className="text-sm font-semibold text-text-light">
+                      {property?.["address.area"]}, {property?.["address.city"]}
+                    </p>
+                  </div>
+                </div>
+              </>
+            }
+            className="p-0 m-0 "
+            primaryTypographyProps={{
+              className: "text-xl font-medium",
+            }}
+            secondaryTypographyProps={{
+              variant: "caption",
+              className: " w-full ",
+            }}
+            key={property?.id}
+          />
         </div>
 
-        {/* last update */}
+        {property?.type === "FLAT" ? (
+          <>
+            <div className="flex flex-row items-center gap-4 py-0 ">
+              {/* Assigned employee list */}
+              <div className="flex flex-row items-center gap-2">
+                <Icon
+                  icon="mingcute:bed-fill"
+                  className="text-2xl text-text-light"
+                />
+                <p className="text-sm font-semibold text-text-light">
+                  {property?.["flat.num_bedroom"]}
+                </p>
+              </div>
 
-        <div className="flex flex-col md:items-end ">
-          <p className="text-sm font-medium md:text-right text-text-light">
-            Last updated
-          </p>
-          <p className="text-sm font-semibold md:text-right text-text-dark">
-            {moment(role?.updated_at).calendar()}
-          </p>
-        </div>
+              {/* Assigned permission list */}
+              <div className="flex flex-row items-center gap-2">
+                <Icon icon="fa:bath" className="text-lg text-text-light" />
+                <p className="text-md font-semibold text-text-light">
+                  {property?.["flat.num_bathroom"]}
+                </p>
+              </div>
+            </div>
+          </>
+        ) : (
+          ""
+        )}
       </div>
 
       <Dropdown menu={{ items }}>

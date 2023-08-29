@@ -9,9 +9,9 @@ import { PROPERTY_ROUTES } from "./routes/paths";
 
 const items: MenuProps["items"] = [
   {
-    label: "List of Roles",
+    label: "List of Properties",
     key: PROPERTY_ROUTES.ROOT,
-    icon: <Icon icon="ic:twotone-person-pin" className="text-xl" />,
+    icon: <Icon icon="fluent:building-20-filled" className="text-xl" />,
   },
   {
     label: "Trash",
@@ -33,7 +33,7 @@ const Navigator: React.FC = () => {
   return (
     <>
       <div className="flex flex-col md:flex-row items-center justify-between gap-2 p-3">
-        <h1 className="text-3xl font-bold">Roles</h1>
+        <h1 className="text-3xl font-bold">Properties</h1>
         <Input
           allowClear
           size="large"
