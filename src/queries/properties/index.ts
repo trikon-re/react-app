@@ -8,5 +8,19 @@ const getProperties = (params: any) => {
 };
 
 export const useGetProperties = (params: any) => {
-  return useQuery(["get-all-Properties", params], () => getProperties(params));
+  return useQuery(["get-all-properties", params], () => getProperties(params));
+};
+
+const getPropertiesById = (id?: string) => {
+  return instance.get(`/assets/${id}`);
+};
+
+export const useGetPropertiesById = (id?: string) => {
+  return useQuery(
+    ["get-all-properties-by-id", id],
+    () => getPropertiesById(id),
+    {
+      enabled: !!id,
+    }
+  );
 };

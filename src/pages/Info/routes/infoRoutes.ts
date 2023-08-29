@@ -11,6 +11,10 @@ export const routes = [
     Component: lazy(() => import("../pages/Roles")),
   },
   {
+    path: ROUTES.PROPERTY,
+    Component: lazy(() => import("../pages/Property")),
+  },
+  {
     path: ROUTES.NOTFOUND,
     Component: lazy(() => import("@pages/NotFound")),
   },
