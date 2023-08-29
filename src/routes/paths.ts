@@ -7,6 +7,7 @@ export const PRIVATE_ROUTES = {
   DASHBOARD: "",
   CREATE: "create/*",
   EMPLOYEES: "employees/*",
+  PROPERTIES: "properties/*",
   ROLES: "roles/*",
   INFO: "info/*",
   MEDIA: "media/*",
