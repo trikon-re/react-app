@@ -1,9 +1,9 @@
 import useAuth from "@/hooks/useAuth";
-import React, { lazy } from "react";
+import React from "react";
 import { Navigate, Outlet, useSearchParams } from "react-router-dom";
 
-const WebsiteHeader = lazy(() => import("./Header"));
-const WebsiteFooter = lazy(() => import("./Footer"));
+// const WebsiteHeader = lazy(() => import("./Header"));
+// const WebsiteFooter = lazy(() => import("./Footer"));
 
 const WebsiteLayout: React.FC = () => {
   let [searchParams] = useSearchParams();

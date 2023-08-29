@@ -1,7 +1,14 @@
 import React from "react";
+import DashboardRoutes from "./routes";
+import Navigator from "./Navigator";
 
 const Dashboard: React.FC = () => {
-  return <div className="text-xl">Dashboard</div>;
+  return (
+    <>
+      <Navigator />
+      <DashboardRoutes />
+    </>
+  );
 };
 
 export default Dashboard;
