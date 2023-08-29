@@ -3,7 +3,9 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ICreateEmployee, IUpdateEmployee } from "./types";
 
 const getEmployees = (params: any) => {
-  return instance.get(`/employees`);
+  return instance.get(`/employees`, {
+    params,
+  });
 };
 
 export const useGetEmployees = (params: any) => {
@@ -46,6 +48,20 @@ const updateEmployeesById = ({
 export const useUpdateEmployeesById = () => {
   const query = useQueryClient();
   return useMutation(updateEmployeesById, {
+    onSuccess: () => {
+      query.invalidateQueries(["get-all-employees"]);
+      query.invalidateQueries(["get-employees-by-id"]);
+    },
+  });
+};
+
+const deleteEmployee = (id: number) => {
+  return instance.delete(`/employees/${id}`);
+};
+
+export const useDeleteEmployee = () => {
+  const query = useQueryClient();
+  return useMutation(deleteEmployee, {
     onSuccess: () => {
       query.invalidateQueries(["get-all-employees"]);
       query.invalidateQueries(["get-employees-by-id"]);

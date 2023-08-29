@@ -7,6 +7,10 @@ export const routes = [
     Component: lazy(() => import("../pages/Employee")),
   },
   {
+    path: ROUTES.ROLE,
+    Component: lazy(() => import("../pages/Roles")),
+  },
+  {
     path: ROUTES.NOTFOUND,
     Component: lazy(() => import("@pages/NotFound")),
   },
