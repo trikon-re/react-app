@@ -46,13 +46,15 @@ const Create: React.FC = () => {
     <>
       {contextHolder}
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-col md:flex-row items-center justify-between max-w-5xl mx-auto my-5 px-5 py-4 text-text">
-          <h1 className="font-bold text-3xl">Create New Employee</h1>
+        <div className="flex flex-col md:flex-row items-center justify-between max-w-5xl mx-auto my-2 px-5 py-4 text-text">
+          <h1 className="font-bold md:text-3xl text-2xl">
+            Create New Employee
+          </h1>
           <Link to={"/app/employees"} className="font-bold text-sm underline">
             View All Employees
           </Link>
         </div>
-        <div className="flex flex-row container mx-auto max-w-5xl">
+        <div className="flex md:flex-row flex-col container mx-auto max-w-5xl">
           <div className="w-full">
             <Divider orientation="left">Basic Info</Divider>
             <div className="px-3">
@@ -447,7 +449,7 @@ const Create: React.FC = () => {
                   className="mt-5 bg-slate-600"
                   disabled={employeeCreating}
                 >
-                  Update
+                  Submit
                 </Button>
               </div>
             </div>

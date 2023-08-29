@@ -7,6 +7,10 @@ export const routes = [
     Component: lazy(() => import("../pages/Overview")),
   },
   {
+    path: ROUTES.PERFORMANCE,
+    Component: lazy(() => import("../pages/Performance")),
+  },
+  {
     path: ROUTES.NOTFOUND,
     Component: lazy(() => import("@pages/NotFound")),
   },
