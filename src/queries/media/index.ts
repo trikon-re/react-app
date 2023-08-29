@@ -23,11 +23,11 @@ export const useCreateMedia = () => {
   });
 };
 
-const getMediaById = (id?: string) => {
+const getMediaById = (id?: number) => {
   return instance.get(`/media/${id}`);
 };
 
-export const useGetMediaById = (id?: string) => {
+export const useGetMediaById = (id?: number) => {
   return useQuery(["get-all-media-by-id", id], () => getMediaById(id), {
     enabled: !!id,
   });

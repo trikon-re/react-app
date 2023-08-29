@@ -10,6 +10,7 @@ import {
 import { Dropdown, MenuProps, Space, Tag } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { IProperty } from "@pages/Properties/types";
+import { useGetMediaById } from "@/queries/media";
 
 const PropertyCard: React.FC<{ property: IProperty }> = ({ property }) => {
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ const PropertyCard: React.FC<{ property: IProperty }> = ({ property }) => {
       danger: true,
     },
   ];
+  const { data: mediaData } = useGetMediaById(property?.media_id);
   console.log(property);
   return (
     <ListItemButton
@@ -52,11 +54,11 @@ const PropertyCard: React.FC<{ property: IProperty }> = ({ property }) => {
             primary={
               <>
                 <div className="flex flex-row jus gap-3">
-                  <div className="flex flex-row items-center">
+                  <div className="flex flex-row items-center text-text">
                     {property?.type === "FLAT" ? (
                       <>
                         <Icon
-                          className="text-xl"
+                          className="text-xl text-text"
                           icon={"fluent:building-20-filled"}
                         />
                       </>
@@ -67,20 +69,22 @@ const PropertyCard: React.FC<{ property: IProperty }> = ({ property }) => {
                     ) : (
                       ""
                     )}
-                    <p className="text-sm font-semibold ">{property?.type}</p>
+                    <p className="text-sm font-semibold capitalize">
+                      {property?.type?.toLowerCase()}
+                    </p>
                   </div>
                   <div className="flex flex-row items-center gap-1">
                     {property?.size ? (
                       <>
                         <Icon
-                          className="text-xl "
+                          className="text-xl text-text"
                           icon={"fluent:slide-size-20-regular"}
                         />
-                        <p className="text-sm font-semibold">
+                        <p className="text-sm font-semibold text-text">
                           {property?.size}
                         </p>
-                        <p className="text-sm font-semibold lowercase ">
-                          {property?.size_unit}
+                        <p className="text-sm font-semibold capitalize text-text ">
+                          {property?.size_unit?.toLowerCase()}.
                         </p>
                       </>
                     ) : (
@@ -104,8 +108,8 @@ const PropertyCard: React.FC<{ property: IProperty }> = ({ property }) => {
                       className="text-xl text-text-light"
                       icon={"tabler:address-book"}
                     />
-                    <p className="text-sm font-semibold">
-                      {property?.media_id}
+                    <p className="text-sm font-semibold text-text-light">
+                      {`${mediaData?.data?.data?.first_name} ${mediaData?.data?.data?.last_name}`}
                     </p>
                   </div>
                 ) : (
@@ -148,7 +152,6 @@ const PropertyCard: React.FC<{ property: IProperty }> = ({ property }) => {
         {property?.type === "FLAT" ? (
           <>
             <div className="flex flex-row items-center gap-4 py-0 ">
-              {/* Assigned employee list */}
               <div className="flex flex-row items-center gap-2">
                 <Icon
                   icon="mingcute:bed-fill"
@@ -158,8 +161,6 @@ const PropertyCard: React.FC<{ property: IProperty }> = ({ property }) => {
                   {property?.["flat.num_bedroom"]}
                 </p>
               </div>
-
-              {/* Assigned permission list */}
               <div className="flex flex-row items-center gap-2">
                 <Icon icon="fa:bath" className="text-lg text-text-light" />
                 <p className="text-md font-semibold text-text-light">

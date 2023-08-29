@@ -47,9 +47,7 @@ const Create: React.FC = () => {
       {contextHolder}
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col md:flex-row items-center justify-between max-w-5xl mx-auto my-2 px-5 py-4 text-text">
-          <h1 className="font-bold md:text-3xl text-2xl">
-            Create New Employee
-          </h1>
+          <p className="font-bold md:text-3xl text-2xl">Create New Employee</p>
           <Link to={"/app/employees"} className="font-bold text-sm underline">
             View All Employees
           </Link>

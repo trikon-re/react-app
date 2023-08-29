@@ -9,6 +9,7 @@ const getRoles = (params: any) => {
 export const useGetRoles = (params: any) => {
   return useQuery(["get-all-roles", params], () => getRoles(params));
 };
+
 const createRole = (data: ICreateRole) => {
   return instance.post("/roles", data);
 };
@@ -17,6 +18,16 @@ export const useCreateRole = () => {
   const queryClient = useQueryClient();
   return useMutation(createRole, {
     onSuccess: () => queryClient.invalidateQueries(["get-all-roles"]),
+  });
+};
+
+const getRoleById = (id?: string) => {
+  return instance.get(`/roles/${id}`);
+};
+
+export const useGetgetRoleById = (id?: string) => {
+  return useQuery(["get-all-roles-by-id", id], () => getRoleById(id), {
+    enabled: !!id,
   });
 };
 
