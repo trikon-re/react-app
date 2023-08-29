@@ -72,7 +72,7 @@ const EmployeeCard: React.FC<{ employee: IEmployees }> = ({ employee }) => {
                 <p className="text-lg font-medium">{`${employee?.first_name} ${employee?.last_name}`}</p>
               </Link>
               <Icon
-                className="text-xl"
+                className="text-xl ml-1"
                 color={employee?.verified_at ? "#087890" : "grey"}
                 icon="ic:round-verified"
               />
