@@ -45,10 +45,7 @@ const Navigator: React.FC = () => {
     <>
       <div className="flex flex-row items-center justify-between gap-2 p-3 text-text">
         <h1 className="text-2xl md:text-3xl font-bold">Media Portal</h1>
-        <Link
-          to={"/app/create/employee"}
-          className="text-sm font-bold underline"
-        >
+        <Link to={"/app/create/media"} className="text-sm font-bold underline">
           Create <span className="hidden md:inline">Media</span>
         </Link>
       </div>

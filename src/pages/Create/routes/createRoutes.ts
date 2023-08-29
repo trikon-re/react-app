@@ -11,6 +11,10 @@ export const routes = [
     Component: lazy(() => import("../pages/Role")),
   },
   {
+    path: ROUTES.MEDIA,
+    Component: lazy(() => import("../pages/Media")),
+  },
+  {
     path: ROUTES.NOTFOUND,
     Component: lazy(() => import("@pages/NotFound")),
   },

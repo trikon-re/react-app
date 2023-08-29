@@ -162,7 +162,7 @@ const items: MenuItem[] = [
         ),
         getItem(
           "Create New Media",
-          "/app/media/create",
+          "/app/create/media",
           <Icon icon={"radix-icons:dashboard"} />
         ),
         getItem(

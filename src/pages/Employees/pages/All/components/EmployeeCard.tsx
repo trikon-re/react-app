@@ -21,7 +21,7 @@ const EmployeeCard: React.FC<{ employee: IEmployees }> = ({ employee }) => {
   const onDelete = async (fileName: number) => {
     message.open({
       type: "loading",
-      content: "Deleting Photo..",
+      content: "Deleting Employee..",
       duration: 0,
     });
     const res = await handleResponse(() => deleteEmployee(employee.id));
