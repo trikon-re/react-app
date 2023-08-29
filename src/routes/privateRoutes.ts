@@ -22,7 +22,10 @@ export const privateRoutes = [
     path: PRIVATE_ROUTES.INFO,
     Component: lazy(() => import("@pages/Info")),
   },
-
+  {
+    path: PRIVATE_ROUTES.MEDIA,
+    Component: lazy(() => import("@pages/Media")),
+  },
   {
     path: PRIVATE_ROUTES.SETTINGS,
     Component: lazy(() => import("@pages/Settings")),
