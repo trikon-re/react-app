@@ -11,6 +11,7 @@ import { useCreateLead } from "@/queries/leads";
 import useMedia from "@/hooks/useMedia";
 import { Icon } from "@iconify/react";
 import useLeadStatus from "@/hooks/useLeadStatus";
+import useEmployee from "@/hooks/useEmployee";
 
 const Create: React.FC = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -18,6 +19,7 @@ const Create: React.FC = () => {
   const { mutateAsync: createLead, isLoading: leadCreating } = useCreateLead();
   const { media, isMediaLoading, searchMedia } = useMedia();
   const { leadStatus, isLeadStatusLoading, searchLeadStatus } = useLeadStatus();
+  const { employee, isEmployeeLoading, searchEmployee } = useEmployee();
 
   const { handleSubmit, control, reset } = useForm({
     // resolver: joiResolver(loginResolver),
@@ -189,7 +191,7 @@ const Create: React.FC = () => {
               </Label>
               <Controller
                 control={control}
-                name={"address_line1"}
+                name={"company"}
                 rules={{ required: true }}
                 render={({
                   field: { onChange, onBlur, value },
@@ -214,7 +216,7 @@ const Create: React.FC = () => {
               </Label>
               <Controller
                 control={control}
-                name={"address_line1"}
+                name={"designation"}
                 rules={{ required: true }}
                 render={({
                   field: { onChange, onBlur, value },
@@ -342,10 +344,10 @@ const Create: React.FC = () => {
                     />
                   </div>
                   <div className="flex-1">
-                    <Label isRequired>Assigned To</Label>
+                    <Label isRequired>Priority</Label>
                     <Controller
                       control={control}
-                      name={"status_id"}
+                      name={"priority"}
                       rules={{ required: true }}
                       render={({
                         field: { onChange, onBlur, value },
@@ -353,29 +355,58 @@ const Create: React.FC = () => {
                       }) => (
                         <Select
                           size="large"
-                          placeholder="Search Status..."
+                          placeholder="Priority..."
                           allowClear={false}
                           value={value || undefined}
-                          showSearch
-                          options={leadStatus}
-                          onSearch={searchLeadStatus}
-                          loading={isLeadStatusLoading}
+                          options={[
+                            { value: "HIGHEST", label: "Highest" },
+                            { value: "HIGH", label: "High" },
+                            { value: "MEDIUM", label: "Medium" },
+                            { value: "LOW", label: "Low" },
+                            { value: "LOWEST ", label: "Lowest" },
+                          ]}
                           onChange={onChange}
                           onBlur={onBlur}
                           className="w-full"
                           status={error ? "error" : ""}
-                          suffixIcon={
-                            <Icon
-                              className="text-xl text-text"
-                              icon={"mingcute:search-3-line"}
-                            />
-                          }
                           //   disabled={isLoading}
                         />
                       )}
                     />
                   </div>
                 </div>
+                <Label isRequired>Assigned To</Label>
+                <Controller
+                  control={control}
+                  name={"assigned_to"}
+                  rules={{ required: true }}
+                  render={({
+                    field: { onChange, onBlur, value },
+                    fieldState: { error },
+                  }) => (
+                    <Select
+                      size="large"
+                      placeholder="Search Employee..."
+                      allowClear={false}
+                      value={value || undefined}
+                      showSearch
+                      options={employee}
+                      onSearch={searchEmployee}
+                      loading={isEmployeeLoading}
+                      onChange={onChange}
+                      onBlur={onBlur}
+                      className="w-full"
+                      status={error ? "error" : ""}
+                      suffixIcon={
+                        <Icon
+                          className="text-xl text-text-dark"
+                          icon={"clarity:employee-solid"}
+                        />
+                      }
+                      //   disabled={isLoading}
+                    />
+                  )}
+                />
               </div>
 
               <Divider orientation="left">Address Details</Divider>
