@@ -26,7 +26,7 @@ export const useGetPropertiesById = (id?: string) => {
   );
 };
 
-const createProperty = (data: ICreateProperty) => {
+const createProperty = (data: ICreateProperty | any) => {
   return instance.post("/assets", data);
 };
 

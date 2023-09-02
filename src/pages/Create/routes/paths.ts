@@ -3,5 +3,6 @@ export const ROUTES = {
   ROLE: "role",
   MEDIA: "media",
   PROPERTY: "property",
+  LEAD: "lead",
   NOTFOUND: "*",
 };

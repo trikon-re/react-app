@@ -25,10 +25,19 @@ const Create: React.FC = () => {
       content: "Creating property..",
       duration: 0,
     });
+    const formattedData = Object.keys(data)
+      .map((key) => {
+        let name = key.replace("__", ".");
+        return { [name]: data[key] };
+      })
+      .reduce((prev, cur) => {
+        prev[Object.keys(cur)[0]] = Object.values(cur)[0];
+        return prev;
+      }, {});
     const res = await handleResponse(
       () =>
         createPropery({
-          ...data,
+          ...formattedData,
         }),
       [201]
     );
@@ -46,7 +55,7 @@ const Create: React.FC = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col md:flex-row items-center justify-between max-w-5xl mx-auto my-2 px-5 py-4 text-text">
           <h1 className="font-bold text-3xl">Create New Property</h1>
-          <Link to={"/app/media"} className="font-bold text-sm underline">
+          <Link to={"/app/properties"} className="font-bold text-sm underline">
             View All Properties
           </Link>
         </div>
@@ -229,7 +238,7 @@ const Create: React.FC = () => {
                   <Input.Group compact>
                     <Controller
                       control={control}
-                      name={"flat.floor"}
+                      name={"flat__floor"}
                       render={({
                         field: { onChange, onBlur, value },
                         fieldState: { error },
@@ -250,7 +259,7 @@ const Create: React.FC = () => {
                     />
                     <Controller
                       control={control}
-                      name={"flat.apt_no"}
+                      name={"flat__apt_no"}
                       rules={{ required: false }}
                       render={({
                         field: { onChange, onBlur, value },
@@ -281,7 +290,7 @@ const Create: React.FC = () => {
                   <Input.Group compact>
                     <Controller
                       control={control}
-                      name={"flat.house_no"}
+                      name={"flat__house_no"}
                       render={({
                         field: { onChange, onBlur, value },
                         fieldState: { error },
@@ -302,7 +311,7 @@ const Create: React.FC = () => {
                     />
                     <Controller
                       control={control}
-                      name={"flat.num_balcony"}
+                      name={"flat__num_balcony"}
                       rules={{ required: false }}
                       render={({
                         field: { onChange, onBlur, value },
@@ -333,7 +342,7 @@ const Create: React.FC = () => {
                   <Input.Group compact>
                     <Controller
                       control={control}
-                      name={"flat.num_bathroom"}
+                      name={"flat__num_bathroom"}
                       render={({
                         field: { onChange, onBlur, value },
                         fieldState: { error },
@@ -354,7 +363,7 @@ const Create: React.FC = () => {
                     />
                     <Controller
                       control={control}
-                      name={"flat.num_bedroom"}
+                      name={"flat__num_bedroom"}
                       rules={{ required: false }}
                       render={({
                         field: { onChange, onBlur, value },
@@ -378,7 +387,7 @@ const Create: React.FC = () => {
                   <Label className="mt-2 mb-1">Flat Direction</Label>
                   <Controller
                     control={control}
-                    name={"flat.facing_side"}
+                    name={"flat__facing_side"}
                     render={({
                       field: { onChange, onBlur, value },
                       fieldState: { error },
@@ -416,7 +425,7 @@ const Create: React.FC = () => {
                 </Label>
                 <Controller
                   control={control}
-                  name={"address.line1"}
+                  name={"address__line1"}
                   rules={{ required: true }}
                   render={({
                     field: { onChange, onBlur, value },
@@ -438,7 +447,7 @@ const Create: React.FC = () => {
                 </Label>
                 <Controller
                   control={control}
-                  name={"address_line2"}
+                  name={"address__line2"}
                   rules={{ required: false }}
                   render={({
                     field: { onChange, onBlur, value },
@@ -466,7 +475,7 @@ const Create: React.FC = () => {
                 <Input.Group compact>
                   <Controller
                     control={control}
-                    name={"address.plot"}
+                    name={"address__plot"}
                     render={({
                       field: { onChange, onBlur, value },
                       fieldState: { error },
@@ -487,7 +496,7 @@ const Create: React.FC = () => {
                   />
                   <Controller
                     control={control}
-                    name={"address.road"}
+                    name={"address__road"}
                     rules={{ required: false }}
                     render={({
                       field: { onChange, onBlur, value },
@@ -518,7 +527,7 @@ const Create: React.FC = () => {
                 <Input.Group compact>
                   <Controller
                     control={control}
-                    name={"address.sector"}
+                    name={"address__sector"}
                     render={({
                       field: { onChange, onBlur, value },
                       fieldState: { error },
@@ -539,7 +548,7 @@ const Create: React.FC = () => {
                   />
                   <Controller
                     control={control}
-                    name={"address.block"}
+                    name={"address__block"}
                     rules={{ required: false }}
                     render={({
                       field: { onChange, onBlur, value },
@@ -571,7 +580,7 @@ const Create: React.FC = () => {
                 <Input.Group compact>
                   <Controller
                     control={control}
-                    name={"address.area"}
+                    name={"address__area"}
                     render={({
                       field: { onChange, onBlur, value },
                       fieldState: { error },
@@ -592,7 +601,7 @@ const Create: React.FC = () => {
                   />
                   <Controller
                     control={control}
-                    name={"address.city"}
+                    name={"address__city"}
                     rules={{ required: false }}
                     render={({
                       field: { onChange, onBlur, value },
@@ -621,7 +630,7 @@ const Create: React.FC = () => {
                     <Label className="mt-2 mb-1">Parking Avaialbe</Label>
                     <Controller
                       control={control}
-                      name={"flat.has_parking"}
+                      name={"flat__has_parking"}
                       // rules={{ required: true }}
                       defaultValue={"false"}
                       render={({
@@ -651,7 +660,7 @@ const Create: React.FC = () => {
                     <Label className="mt-2 mb-1">Lift Avaialbe</Label>
                     <Controller
                       control={control}
-                      name={"flat.has_lift"}
+                      name={"flat__has_lift"}
                       // rules={{ required: true }}
                       defaultValue={"false"}
                       render={({
@@ -681,7 +690,7 @@ const Create: React.FC = () => {
                     <Label className="mt-2 mb-1">Brand New</Label>
                     <Controller
                       control={control}
-                      name={"flat.is_used"}
+                      name={"flat__is_used"}
                       // rules={{ required: true }}
                       defaultValue={"false"}
                       render={({
