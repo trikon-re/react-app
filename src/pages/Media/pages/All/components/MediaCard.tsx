@@ -37,7 +37,7 @@ const MediaCard: React.FC<{ media: IMedia }> = ({ media }) => {
   const items: MenuProps["items"] = [
     {
       label: "View details",
-      onClick: () => navigate(`/app/info/media/${media.id}`),
+      onClick: () => navigate(`/app/info/medias/${media.id}`),
       key: 1,
       icon: <Icon icon="gg:details-more" className="text-xl" />,
     },

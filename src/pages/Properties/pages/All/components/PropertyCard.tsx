@@ -18,7 +18,7 @@ const PropertyCard: React.FC<{ property: IProperty }> = ({ property }) => {
   const items: MenuProps["items"] = [
     {
       label: "View details",
-      onClick: () => navigate(`/app/info/property/${property.id}`),
+      onClick: () => navigate(`/app/info/properties/${property.id}`),
       key: 1,
       icon: <Icon icon="gg:details-more" className="text-xl" />,
     },

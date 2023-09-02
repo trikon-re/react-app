@@ -37,7 +37,7 @@ const EmployeeCard: React.FC<{ employee: IEmployees }> = ({ employee }) => {
   const items: MenuProps["items"] = [
     {
       label: "View details",
-      onClick: () => navigate(`/app/info/employee/${employee.id}`),
+      onClick: () => navigate(`/app/info/employees/${employee.id}`),
       key: 1,
       icon: <Icon icon="gg:details-more" className="text-xl" />,
     },
