@@ -109,8 +109,7 @@ const items: MenuItem[] = [
           "Create New Property",
           "/app/create/property",
           <Icon icon={"bi:building-add"} />,
-          undefined,
-          true
+          undefined
         ),
         getItem(
           "List of Properties",
