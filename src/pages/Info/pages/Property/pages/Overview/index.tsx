@@ -269,7 +269,7 @@ const Overview: React.FC = () => {
             orientation="left"
             className="text-lg font-semibold text-text pt-4"
           >
-            Medial Information{" "}
+            Medial Information
           </Divider>
 
           <div className="flex flex-row items-center px-4">

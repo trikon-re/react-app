@@ -1,5 +1,6 @@
 import instance from "@/services";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { ICreateProperty } from "./types";
 
 const getProperties = (params: any) => {
   return instance.get(`/assets`, {
@@ -23,4 +24,15 @@ export const useGetPropertiesById = (id?: string) => {
       enabled: !!id,
     }
   );
+};
+
+const createProperty = (data: ICreateProperty | any) => {
+  return instance.post("/assets", data);
+};
+
+export const useCreateProperty = () => {
+  const queryClient = useQueryClient();
+  return useMutation(createProperty, {
+    onSuccess: () => queryClient.invalidateQueries(["get-all-properties"]),
+  });
 };
