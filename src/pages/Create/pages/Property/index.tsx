@@ -66,7 +66,6 @@ const Create: React.FC = () => {
             <div className="px-3">
               <div className="flex flex-row">
                 <span className="w-2/3">
-                  {" "}
                   <Label isRequired>Media</Label>
                 </span>
                 <span>
