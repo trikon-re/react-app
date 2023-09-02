@@ -1,5 +1,5 @@
 import Label from "@components/Label";
-import { Divider, Input, Segmented } from "antd";
+import { Divider, Input, Segmented, Select } from "antd";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
@@ -7,11 +7,14 @@ import { Button, Divider as MuiDivider } from "@mui/material";
 import { message } from "@components/antd/message";
 import { useCreateProperty } from "@/queries/properties";
 import handleResponse from "@/utilities/handleResponse";
+import useMedia from "@/hooks/useMedia";
+import { Icon } from "@iconify/react";
 
 const Create: React.FC = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const { mutateAsync: createPropery, isLoading: propertyCreating } =
     useCreateProperty();
+  const { media, isMediaLoading, searchMedia } = useMedia();
   const { handleSubmit, control, reset, watch } = useForm({
     // resolver: joiResolver(loginResolver),
   });
@@ -50,7 +53,76 @@ const Create: React.FC = () => {
         <div className="flex md:flex-row flex-col container mx-auto max-w-5xl">
           <div className="w-full">
             <Divider orientation="left">Basic Info</Divider>
+
             <div className="px-3">
+              <div className="flex flex-row">
+                <span className="w-2/3">
+                  {" "}
+                  <Label isRequired>Media</Label>
+                </span>
+                <span>
+                  <Label isRequired>Commision</Label>
+                </span>
+              </div>
+              <Input.Group compact>
+                <Controller
+                  control={control}
+                  name={"media_id"}
+                  rules={{ required: true }}
+                  render={({
+                    field: { onChange, onBlur, value },
+                    fieldState: { error },
+                  }) => (
+                    <Select
+                      size="large"
+                      placeholder="Search media..."
+                      allowClear={false}
+                      value={value || undefined}
+                      showSearch
+                      options={media}
+                      onSearch={searchMedia}
+                      loading={isMediaLoading}
+                      onChange={onChange}
+                      onBlur={onBlur}
+                      className="w-2/3 border-r-0"
+                      status={error ? "error" : ""}
+                      suffixIcon={
+                        <Icon
+                          className="text-xl text-text"
+                          icon={"mingcute:search-3-line"}
+                        />
+                      }
+                      //   disabled={isLoading}
+                    />
+                  )}
+                />
+                <Controller
+                  control={control}
+                  name={"media_commision"}
+                  rules={{ required: true }}
+                  render={({
+                    field: { onChange, onBlur, value },
+                    fieldState: { error },
+                  }) => (
+                    <Input
+                      className="w-1/3"
+                      placeholder={"Commision"}
+                      size={"large"}
+                      onChange={onChange}
+                      onBlur={onBlur}
+                      value={value}
+                      status={error ? "error" : ""}
+                      suffix={
+                        <Icon
+                          icon={"mdi:percent-box"}
+                          className="text-text-light text-lg"
+                        />
+                      }
+                      //   suffix={<ErrorSuffix error={error} />}
+                    />
+                  )}
+                />
+              </Input.Group>
               <Label isRequired className="mt-2 mb-1">
                 Property Type
               </Label>
@@ -83,52 +155,10 @@ const Create: React.FC = () => {
                   />
                 )}
               />
-              {/* {watch("type") === "FLAT" ? "SQFT" : "KATHA"} */}
 
-              {/* <Label isRequired>Full Name</Label>
-              <Input.Group compact>
-                <Controller
-                  control={control}
-                  name={"first_name"}
-                  rules={{ required: true }}
-                  render={({
-                    field: { onChange, onBlur, value },
-                    fieldState: { error },
-                  }) => (
-                    <Input
-                      className="w-1/2"
-                      placeholder={"Enter First Name"}
-                      size={"large"}
-                      onChange={onChange}
-                      onBlur={onBlur}
-                      value={value}
-                      status={error ? "error" : ""}
-                      //   suffix={<ErrorSuffix error={error} />}
-                    />
-                  )}
-                />
-                <Controller
-                  control={control}
-                  name={"last_name"}
-                  rules={{ required: true }}
-                  render={({
-                    field: { onChange, onBlur, value },
-                    fieldState: { error },
-                  }) => (
-                    <Input
-                      className="w-1/2"
-                      placeholder={"Enter Last Name"}
-                      size={"large"}
-                      onChange={onChange}
-                      onBlur={onBlur}
-                      value={value}
-                      status={error ? "error" : ""}
-                      //   suffix={<ErrorSuffix error={error} />}
-                    />
-                  )}
-                />
-              </Input.Group> */}
-              <Label className="mt-2 mb-1 ">Size</Label>
+              <Label isRequired className="mt-2 mb-1 ">
+                Property Size
+              </Label>
               <Controller
                 control={control}
                 name={"size"}
@@ -144,12 +174,20 @@ const Create: React.FC = () => {
                     onBlur={onBlur}
                     value={value}
                     status={error ? "error" : ""}
-                    addonAfter={watch("type") === "FLAT" ? "SQFT" : "KATHA"}
+                    addonAfter={
+                      watch("type") === "FLAT" ? (
+                        <div className="text-xs font-semibold">SQFT</div>
+                      ) : (
+                        <div className="text-xs font-semibold">KATHA</div>
+                      )
+                    }
                     //   suffix={<ErrorSuffix error={error} />}
                   />
                 )}
               />
-              <Label className="mt-2 mb-1 ">Price</Label>
+              <Label isRequired className="mt-2 mb-1 ">
+                Property Price
+              </Label>
               <Controller
                 control={control}
                 name={"price"}
@@ -165,58 +203,205 @@ const Create: React.FC = () => {
                     onBlur={onBlur}
                     value={value}
                     status={error ? "error" : ""}
-                    addonAfter={watch("type") === "FLAT" ? "SQFT" : "KATHA"}
+                    addonAfter={
+                      <Icon
+                        className="text-xl text-text"
+                        icon={"tabler:currency-taka"}
+                      />
+                    }
                     //   suffix={<ErrorSuffix error={error} />}
                   />
                 )}
               />
-
-              <Label isRequired className="mt-2 mb-1">
-                Phone
-              </Label>
-              <Controller
-                control={control}
-                name={"phone"}
-                rules={{ required: true }}
-                render={({
-                  field: { onChange, onBlur, value },
-                  fieldState: { error },
-                }) => (
-                  <Input
-                    // disabled
-                    placeholder={"Enter Phone Number"}
-                    size={"large"}
-                    onChange={onChange}
-                    onBlur={onBlur}
-                    value={value}
-                    status={error ? "error" : ""}
-                    //   suffix={<ErrorSuffix error={error} />}
-                  />
-                )}
-              />
-              {/* <Label isRequired className="mt-2 mb-1">
-                Date of Birth
-              </Label>
-              <Controller
-                control={control}
-                name={"dob"}
-                // rules={{}}
-                defaultValue={dayjs()}
-                render={({
-                  field: { onChange, onBlur, value },
-                  fieldState: { error },
-                }) => (
-                  <DatePicker
-                    size="large"
-                    className={"w-full"}
-                    placeholder="Date of Birth"
-                    onChange={onChange}
-                    onBlur={onBlur}
-                    value={dayjs(value)}
-                  />
-                )}
-              /> */}
             </div>
+            {watch("type") === "FLAT" ? (
+              <>
+                <Divider orientation="left">Flat Details</Divider>
+                <div className="px-3">
+                  <div className="flex flex-row mt-2">
+                    <span className="w-1/2">
+                      <Label>Floor :</Label>
+                    </span>
+                    <span>
+                      <Label>Apartment No :</Label>
+                    </span>
+                  </div>
+                  <Input.Group compact>
+                    <Controller
+                      control={control}
+                      name={"flat.floor"}
+                      render={({
+                        field: { onChange, onBlur, value },
+                        fieldState: { error },
+                      }) => (
+                        <Input
+                          size="large"
+                          placeholder="Floor No."
+                          allowClear={false}
+                          value={value || undefined}
+                          onChange={onChange}
+                          onBlur={onBlur}
+                          className="w-1/2 border-r-0"
+                          status={error ? "error" : ""}
+
+                          //   disabled={isLoading}
+                        />
+                      )}
+                    />
+                    <Controller
+                      control={control}
+                      name={"flat.apt_no"}
+                      rules={{ required: false }}
+                      render={({
+                        field: { onChange, onBlur, value },
+                        fieldState: { error },
+                      }) => (
+                        <Input
+                          className="w-1/2"
+                          placeholder={"Apt. No."}
+                          size={"large"}
+                          onChange={onChange}
+                          onBlur={onBlur}
+                          value={value}
+                          status={error ? "error" : ""}
+
+                          //   suffix={<ErrorSuffix error={error} />}
+                        />
+                      )}
+                    />
+                  </Input.Group>
+                  <div className="flex flex-row mt-2">
+                    <span className="w-1/2">
+                      <Label>House :</Label>
+                    </span>
+                    <span>
+                      <Label>Belcony :</Label>
+                    </span>
+                  </div>
+                  <Input.Group compact>
+                    <Controller
+                      control={control}
+                      name={"flat.house_no"}
+                      render={({
+                        field: { onChange, onBlur, value },
+                        fieldState: { error },
+                      }) => (
+                        <Input
+                          size="large"
+                          placeholder="House No."
+                          allowClear={false}
+                          value={value || undefined}
+                          onChange={onChange}
+                          onBlur={onBlur}
+                          className="w-1/2 border-r-0"
+                          status={error ? "error" : ""}
+
+                          //   disabled={isLoading}
+                        />
+                      )}
+                    />
+                    <Controller
+                      control={control}
+                      name={"flat.num_balcony"}
+                      rules={{ required: false }}
+                      render={({
+                        field: { onChange, onBlur, value },
+                        fieldState: { error },
+                      }) => (
+                        <Input
+                          className="w-1/2"
+                          placeholder={"Belcony No."}
+                          size={"large"}
+                          onChange={onChange}
+                          onBlur={onBlur}
+                          value={value}
+                          status={error ? "error" : ""}
+
+                          //   suffix={<ErrorSuffix error={error} />}
+                        />
+                      )}
+                    />
+                  </Input.Group>
+                  <div className="flex flex-row mt-2">
+                    <span className="w-1/2">
+                      <Label>Bathroom :</Label>
+                    </span>
+                    <span>
+                      <Label>Bedroom :</Label>
+                    </span>
+                  </div>
+                  <Input.Group compact>
+                    <Controller
+                      control={control}
+                      name={"flat.num_bathroom"}
+                      render={({
+                        field: { onChange, onBlur, value },
+                        fieldState: { error },
+                      }) => (
+                        <Input
+                          size="large"
+                          placeholder="Bathroom No."
+                          allowClear={false}
+                          value={value || undefined}
+                          onChange={onChange}
+                          onBlur={onBlur}
+                          className="w-1/2 border-r-0"
+                          status={error ? "error" : ""}
+
+                          //   disabled={isLoading}
+                        />
+                      )}
+                    />
+                    <Controller
+                      control={control}
+                      name={"flat.num_bedroom"}
+                      rules={{ required: false }}
+                      render={({
+                        field: { onChange, onBlur, value },
+                        fieldState: { error },
+                      }) => (
+                        <Input
+                          className="w-1/2"
+                          placeholder={"Bedroom No."}
+                          size={"large"}
+                          onChange={onChange}
+                          onBlur={onBlur}
+                          value={value}
+                          status={error ? "error" : ""}
+
+                          //   suffix={<ErrorSuffix error={error} />}
+                        />
+                      )}
+                    />
+                  </Input.Group>
+
+                  <Label className="mt-2 mb-1">Flat Direction</Label>
+                  <Controller
+                    control={control}
+                    name={"flat.facing_side"}
+                    render={({
+                      field: { onChange, onBlur, value },
+                      fieldState: { error },
+                    }) => (
+                      <Input
+                        size="large"
+                        placeholder="South, East, West, North"
+                        allowClear={false}
+                        value={value || undefined}
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        className="w-full "
+                        status={error ? "error" : ""}
+
+                        //   disabled={isLoading}
+                      />
+                    )}
+                  />
+                </div>
+              </>
+            ) : (
+              ""
+            )}
           </div>
           <MuiDivider flexItem orientation="vertical" className="mt-7" />
           <div className="w-full">
@@ -231,7 +416,7 @@ const Create: React.FC = () => {
                 </Label>
                 <Controller
                   control={control}
-                  name={"address_line1"}
+                  name={"address.line1"}
                   rules={{ required: true }}
                   render={({
                     field: { onChange, onBlur, value },
@@ -248,16 +433,13 @@ const Create: React.FC = () => {
                     />
                   )}
                 />
-                <Label
-                  isRequired
-                  className="flex flex-row items-center gap-1 mt-2 my-1"
-                >
+                <Label className="flex flex-row items-center gap-1 mt-2 my-1">
                   Address Line 2
                 </Label>
                 <Controller
                   control={control}
                   name={"address_line2"}
-                  rules={{ required: true }}
+                  rules={{ required: false }}
                   render={({
                     field: { onChange, onBlur, value },
                     fieldState: { error },
@@ -273,13 +455,270 @@ const Create: React.FC = () => {
                     />
                   )}
                 />
+                <div className="flex flex-row mt-2">
+                  <span className="w-1/2">
+                    <Label>Plot No.</Label>
+                  </span>
+                  <span>
+                    <Label>Road</Label>
+                  </span>
+                </div>
+                <Input.Group compact>
+                  <Controller
+                    control={control}
+                    name={"address.plot"}
+                    render={({
+                      field: { onChange, onBlur, value },
+                      fieldState: { error },
+                    }) => (
+                      <Input
+                        size="large"
+                        placeholder="Plot number.."
+                        allowClear={false}
+                        value={value || undefined}
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        className="w-1/2 border-r-0"
+                        status={error ? "error" : ""}
+
+                        //   disabled={isLoading}
+                      />
+                    )}
+                  />
+                  <Controller
+                    control={control}
+                    name={"address.road"}
+                    rules={{ required: false }}
+                    render={({
+                      field: { onChange, onBlur, value },
+                      fieldState: { error },
+                    }) => (
+                      <Input
+                        className="w-1/2"
+                        placeholder={"Road.."}
+                        size={"large"}
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        value={value}
+                        status={error ? "error" : ""}
+
+                        //   suffix={<ErrorSuffix error={error} />}
+                      />
+                    )}
+                  />
+                </Input.Group>
+                <div className="flex flex-row mt-2">
+                  <span className="w-1/2">
+                    <Label>Sector</Label>
+                  </span>
+                  <span>
+                    <Label>Block</Label>
+                  </span>
+                </div>
+                <Input.Group compact>
+                  <Controller
+                    control={control}
+                    name={"address.sector"}
+                    render={({
+                      field: { onChange, onBlur, value },
+                      fieldState: { error },
+                    }) => (
+                      <Input
+                        size="large"
+                        placeholder="Sector.."
+                        allowClear={false}
+                        value={value || undefined}
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        className="w-1/2 border-r-0"
+                        status={error ? "error" : ""}
+
+                        //   disabled={isLoading}
+                      />
+                    )}
+                  />
+                  <Controller
+                    control={control}
+                    name={"address.block"}
+                    rules={{ required: false }}
+                    render={({
+                      field: { onChange, onBlur, value },
+                      fieldState: { error },
+                    }) => (
+                      <Input
+                        className="w-1/2"
+                        placeholder={"Block.."}
+                        size={"large"}
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        value={value}
+                        status={error ? "error" : ""}
+
+                        //   suffix={<ErrorSuffix error={error} />}
+                      />
+                    )}
+                  />
+                </Input.Group>
+
+                <div className="flex flex-row mt-2">
+                  <span className="w-1/2">
+                    <Label>Area</Label>
+                  </span>
+                  <span>
+                    <Label>City</Label>
+                  </span>
+                </div>
+                <Input.Group compact>
+                  <Controller
+                    control={control}
+                    name={"address.area"}
+                    render={({
+                      field: { onChange, onBlur, value },
+                      fieldState: { error },
+                    }) => (
+                      <Input
+                        size="large"
+                        placeholder="Area.."
+                        allowClear={false}
+                        value={value || undefined}
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        className="w-1/2 border-r-0"
+                        status={error ? "error" : ""}
+
+                        //   disabled={isLoading}
+                      />
+                    )}
+                  />
+                  <Controller
+                    control={control}
+                    name={"address.city"}
+                    rules={{ required: false }}
+                    render={({
+                      field: { onChange, onBlur, value },
+                      fieldState: { error },
+                    }) => (
+                      <Input
+                        className="w-1/2"
+                        placeholder={"City.."}
+                        size={"large"}
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        value={value}
+                        status={error ? "error" : ""}
+
+                        //   suffix={<ErrorSuffix error={error} />}
+                      />
+                    )}
+                  />
+                </Input.Group>
+                {watch("type") === "FLAT" ? (
+                  <>
+                    <Divider orientation="left">
+                      Flat Additional Details
+                    </Divider>
+
+                    <Label className="mt-2 mb-1">Parking Avaialbe</Label>
+                    <Controller
+                      control={control}
+                      name={"flat.has_parking"}
+                      // rules={{ required: true }}
+                      defaultValue={"false"}
+                      render={({
+                        field: { onChange, onBlur, value },
+                        fieldState: { error },
+                      }) => (
+                        <Segmented
+                          block
+                          placeholder={"Parking"}
+                          size={"large"}
+                          className="relative w-full"
+                          allowFullScreen
+                          onChange={onChange}
+                          onBlur={onBlur}
+                          value={value}
+                          options={[
+                            { value: "true", label: "True" },
+                            { value: "false", label: "False" },
+                          ]}
+                          onResize={undefined}
+                          onResizeCapture={undefined}
+                          // status={error ? "error" : ""}
+                          // loading={isLoading}
+                        />
+                      )}
+                    />
+                    <Label className="mt-2 mb-1">Lift Avaialbe</Label>
+                    <Controller
+                      control={control}
+                      name={"flat.has_lift"}
+                      // rules={{ required: true }}
+                      defaultValue={"false"}
+                      render={({
+                        field: { onChange, onBlur, value },
+                        fieldState: { error },
+                      }) => (
+                        <Segmented
+                          block
+                          placeholder={"Lift"}
+                          size={"large"}
+                          className="relative w-full"
+                          allowFullScreen
+                          onChange={onChange}
+                          onBlur={onBlur}
+                          value={value}
+                          options={[
+                            { value: "true", label: "True" },
+                            { value: "false", label: "False" },
+                          ]}
+                          onResize={undefined}
+                          onResizeCapture={undefined}
+                          // status={error ? "error" : ""}
+                          // loading={isLoading}
+                        />
+                      )}
+                    />
+                    <Label className="mt-2 mb-1">Brand New</Label>
+                    <Controller
+                      control={control}
+                      name={"flat.is_used"}
+                      // rules={{ required: true }}
+                      defaultValue={"false"}
+                      render={({
+                        field: { onChange, onBlur, value },
+                        fieldState: { error },
+                      }) => (
+                        <Segmented
+                          block
+                          placeholder={"USed"}
+                          size={"large"}
+                          className="relative w-full"
+                          allowFullScreen
+                          onChange={onChange}
+                          onBlur={onBlur}
+                          value={value}
+                          options={[
+                            { value: "false", label: "True" },
+                            { value: "true", label: "False" },
+                          ]}
+                          onResize={undefined}
+                          onResizeCapture={undefined}
+                          // status={error ? "error" : ""}
+                          // loading={isLoading}
+                        />
+                      )}
+                    />
+                  </>
+                ) : (
+                  ""
+                )}
                 <Button
                   variant="contained"
                   fullWidth
                   size="large"
                   type={"submit"}
                   className="mt-5 bg-slate-600"
-                  //   disabled={mediaCreating}
+                  disabled={propertyCreating}
                 >
                   Submit
                 </Button>
