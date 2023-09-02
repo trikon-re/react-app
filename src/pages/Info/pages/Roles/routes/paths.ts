@@ -1,4 +1,5 @@
 export const ROUTES = {
-  OVERVIEW: "",
-  NOTFOUND: "*",
+	OVERVIEW: "",
+	PERMISSIONS: "permissions",
+	NOTFOUND: "*",
 };
