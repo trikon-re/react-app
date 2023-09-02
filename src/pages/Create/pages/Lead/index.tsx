@@ -52,7 +52,7 @@ const Create: React.FC = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col md:flex-row items-center justify-between max-w-5xl mx-auto my-2 px-5 py-4 text-text">
           <h1 className="font-bold text-3xl">Create New Lead</h1>
-          <Link to={"/app/Lead"} className="font-bold text-sm underline">
+          <Link to={"/app/leads"} className="font-bold text-sm underline">
             View All Leads
           </Link>
         </div>

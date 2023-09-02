@@ -1,7 +1,8 @@
 export const ROUTES = {
-	EMPLOYEE: "employee/:id/*",
-	ROLE: "role/:id/*",
-	MEDIA: "media/:id/*",
-	PROPERTY: "property/:id/*",
-	NOTFOUND: "*",
+  EMPLOYEE: "employees/:id/*",
+  ROLE: "roles/:id/*",
+  MEDIA: "medias/:id/*",
+  LEAD: "leads/:id/*",
+  PROPERTY: "properties/:id/*",
+  NOTFOUND: "*",
 };

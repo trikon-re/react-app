@@ -39,12 +39,11 @@ const Overview: React.FC = () => {
   // const { mutateAsync: updateEmployee, isLoading: isSubmitting } =
   //   useUpdateEmployeesById();
   const { data: mediaData } = useGetMediaById(propertyInfo?.media_id);
+
   React.useEffect(() => {
     if (!data) return;
     setPropertyInfo(data?.data?.data);
   }, [data]);
-
-  console.log(mediaData);
 
   // React.useEffect(() => {
   //   if (!employeeInfo || isDirty) return;

@@ -33,7 +33,7 @@ const RoleCard: React.FC<{ role: IRoles }> = ({ role }) => {
   const items: MenuProps["items"] = [
     {
       label: "View details",
-      onClick: () => navigate(`/app/info/role/${role.id}`),
+      onClick: () => navigate(`/app/info/roles/${role.id}`),
       key: 1,
       icon: <Icon icon="gg:details-more" className="text-xl" />,
     },

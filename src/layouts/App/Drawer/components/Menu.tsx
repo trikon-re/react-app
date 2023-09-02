@@ -40,63 +40,74 @@ const items: MenuItem[] = [
     type: "group",
     label: "Operations",
     children: [
-      getItem(
-        "Leads",
-        "/leads",
-        <Icon icon={"iconamoon:funnel-light"} />,
-        [
-          getItem(
-            "Overview",
-            "/app/leads/overview",
-            <Icon icon={"icon-park-outline:view-grid-list"} />
-          ),
-          getItem(
-            "Create New Lead",
-            "/app/leads/create",
-            <Icon icon={"mdi:funnel-plus-outline"} />
-          ),
-          getItem(
-            "List of Leads",
-            "/app/leads/all",
-            <Icon icon={"fluent:data-funnel-24-regular"} />,
-            [
-              getItem(
-                "All Leads",
-                "/app/leads/all",
-                <Icon icon={"mdi:funnel-multiple-outline"} />
-              ),
-              getItem(
-                "New Leads",
-                "/app/leads/all?assign=null&total_assigned_persons=0",
-                <Icon icon={"ic:outline-new-releases"} />
-              ),
-              getItem(
-                "Pending Leads",
-                "/app/leads/all?status=pending",
-                <Icon icon={"ri:rest-time-line"} />
-              ),
-              getItem(
-                "Complete Leads",
-                "/app/leads/all?status=done",
-                <Icon icon={"mdi:funnel-check-outline"} />
-              ),
-              getItem(
-                "Canceled Leads",
-                "/app/leads/all?status=canceled",
-                <Icon icon={"mdi:funnel-remove-outline"} />
-              ),
-            ]
-          ),
-          getItem("Trash", "/leads/trash", <Icon icon={"gg:trash"} />),
-          getItem(
-            "Reports",
-            "/app/leads/reports",
-            <Icon icon={"tabler:report"} />,
-            []
-          ),
-        ],
-        true
-      ),
+      getItem("Leads", "/leads", <Icon icon={"iconamoon:funnel-light"} />, [
+        getItem(
+          "Overview",
+          "/app/leads/overview",
+          <Icon icon={"icon-park-outline:view-grid-list"} />,
+          undefined,
+          true
+        ),
+        getItem(
+          "Create New Lead",
+          "/app/create/lead",
+          <Icon icon={"mdi:funnel-plus-outline"} />
+        ),
+        getItem(
+          "List of Leads",
+          "/app/leads",
+          <Icon icon={"fluent:data-funnel-24-regular"} />,
+          [
+            getItem(
+              "All Leads",
+              "/app/leads",
+              <Icon icon={"mdi:funnel-multiple-outline"} />
+            ),
+            getItem(
+              "New Leads",
+              "/app/leads/all?assign=null&total_assigned_persons=0",
+              <Icon icon={"ic:outline-new-releases"} />,
+              undefined,
+              true
+            ),
+            getItem(
+              "Pending Leads",
+              "/app/leads/all?status=pending",
+              <Icon icon={"ri:rest-time-line"} />,
+              undefined,
+              true
+            ),
+            getItem(
+              "Complete Leads",
+              "/app/leads/all?status=done",
+              <Icon icon={"mdi:funnel-check-outline"} />,
+              undefined,
+              true
+            ),
+            getItem(
+              "Canceled Leads",
+              "/app/leads/all?status=canceled",
+              <Icon icon={"mdi:funnel-remove-outline"} />,
+              undefined,
+              true
+            ),
+          ]
+        ),
+        getItem(
+          "Trash",
+          "/leads/trash",
+          <Icon icon={"gg:trash"} />,
+          undefined,
+          true
+        ),
+        getItem(
+          "Reports",
+          "/app/leads/reports",
+          <Icon icon={"tabler:report"} />,
+          undefined,
+          true
+        ),
+      ]),
       getItem("Properties", "/properties", <Icon icon={"mdi:building"} />, [
         getItem(
           "Overview",
