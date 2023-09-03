@@ -56,7 +56,7 @@ const MediaCard: React.FC<{ media: IMedia }> = ({ media }) => {
         disableRipple
         disableTouchRipple
       >
-        <Link to={`/app/info/media/${media.id}`}>
+        <Link to={`/app/info/medias/${media.id}`}>
           <Avatar
             variant="rounded"
             src={media?.display_picture}
@@ -68,7 +68,7 @@ const MediaCard: React.FC<{ media: IMedia }> = ({ media }) => {
           primary={
             <>
               <Link
-                to={`/app/info/media/${media.id}`}
+                to={`/app/info/medias/${media.id}`}
                 className="flex flex-row gap-2 items-center"
               >
                 <p className="text-xl font-medium">{`${media?.first_name} ${media?.last_name}`}</p>

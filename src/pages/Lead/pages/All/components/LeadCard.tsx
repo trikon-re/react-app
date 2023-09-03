@@ -60,8 +60,15 @@ const LeadCard: React.FC<{ lead: ILeads }> = ({ lead }) => {
           className="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-md mt-1"
         />
       </Link> */}
-      <div className="flex items-center justify-center md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-md mt-1 bg-[#adad]">
-        <p className="font-semibold">{lead?.status?.label}</p>
+      <div
+        className={`flex items-center justify-center md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-md mt-1 border aspect-square`}
+        style={{
+          background: lead?.status?.color || "#adad",
+        }}
+      >
+        <p className="font-bold text-text text-opacity-70">
+          {lead?.status?.label}
+        </p>
       </div>
       <ListItemText
         primary={

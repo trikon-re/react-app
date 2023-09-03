@@ -40,7 +40,7 @@ const PropertyCard: React.FC<{ property: IProperty }> = ({ property }) => {
     >
       <div className="grid md:grid-cols-2 grid-cols-1 items-center flex-1">
         <div className="flex flex-row items-center flex-1">
-          <Link to={`/app/info/property/${property.id}`}>
+          <Link to={`/app/info/properties/${property.id}`}>
             <Avatar
               variant="rounded"
               // src={property?.display_picture}
