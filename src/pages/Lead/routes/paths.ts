@@ -1,5 +1,7 @@
 export const LEAD_ROUTES = {
-  ROOT: "",
-  TRASH: "trash",
-  NOTFOUND: "*",
+	OVERVIEW: "overview",
+	REPORT: "reports",
+	ROOT: "",
+	TRASH: "trash",
+	NOTFOUND: "*",
 };

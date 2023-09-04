@@ -1,28 +1,32 @@
-import { useGetEmployees } from "@/queries/employees";
+import { useGetLeads } from "@/queries/leads";
 import React from "react";
-import { IEmployees } from "@pages/Employees/types";
-import EmployeeCard from "./components/EmployeeCard";
 import useSearchParamsPaginate from "@/hooks/useSearchParamsPaginate";
 import { Pagination } from "antd";
+import { ILeads } from "@pages/Lead/types";
+import LeadCard from "../All/components/LeadCard";
 
-const Employees: React.FC = () => {
+const Trash: React.FC = () => {
 	const { page, setPage, getQueryParams, limit, setLimit } =
 		useSearchParamsPaginate();
 
-	const { data } = useGetEmployees(getQueryParams());
-	const [employees, setEmployees] = React.useState<any>([]);
+	const { data } = useGetLeads({
+		...getQueryParams(),
+		trash: true,
+	});
+
+	const [leads, setLeads] = React.useState<any>([]);
 
 	React.useEffect(() => {
 		if (!data) return;
-		setEmployees(data?.data?.data);
+		setLeads(data?.data?.data);
 	}, [data]);
 
 	return (
 		<>
 			<div className="py-2">
-				{employees?.map?.((s: IEmployees) => (
-					<EmployeeCard
-						employee={s}
+				{leads?.map?.((s: ILeads) => (
+					<LeadCard
+						lead={s}
 						key={s.id}
 					/>
 				))}
@@ -30,13 +34,11 @@ const Employees: React.FC = () => {
 				<div className="flex flex-row justify-end">
 					<Pagination
 						total={data?.data?.total}
-						onChange={(p) => {
-							setPage(p - 1);
+						onChange={(p, ps) => {
+							setPage(p);
+							setLimit(ps);
 						}}
-						onShowSizeChange={(c, s) => {
-							setLimit(s);
-						}}
-						current={page + 1}
+						current={page}
 						pageSize={limit}
 						showSizeChanger
 						pageSizeOptions={[2, 5, 10, 20, 50, 100, 500]}
@@ -46,4 +48,4 @@ const Employees: React.FC = () => {
 		</>
 	);
 };
-export default Employees;
+export default Trash;
