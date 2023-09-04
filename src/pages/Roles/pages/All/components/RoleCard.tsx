@@ -13,16 +13,66 @@ const RoleCard: React.FC<{ role: IRoles }> = ({ role }) => {
   const navigate = useNavigate();
   const { mutateAsync: deleteRole } = useDeleteRole();
 
-  const onDelete = async (fileName: number) => {
+  const onDelete = async () => {
     message.open({
       type: "loading",
       content: "Deleting Role..",
       duration: 0,
     });
-    const res = await handleResponse(() => deleteRole(role.id));
+
+    const res = await handleResponse(() => deleteRole({ id: role.id }));
     message.destroy();
     if (res.status) {
       message.success("Role deleted successfully!");
+      return true;
+    } else {
+      message.error(res.message);
+      return false;
+    }
+  };
+
+  const onPermaDel = async () => {
+    message.open({
+      type: "loading",
+      content: "Permanently Deleting Role..",
+      duration: 0,
+    });
+
+    const res = await handleResponse(() =>
+      deleteRole({
+        id: role.id,
+        params: {
+          permanent: true,
+        },
+      })
+    );
+    message.destroy();
+    if (res.status) {
+      message.success("Role deleted permanently!");
+      return true;
+    } else {
+      message.error(res.message);
+      return false;
+    }
+  };
+  const onRestore = async () => {
+    message.open({
+      type: "loading",
+      content: "Restoring Role..",
+      duration: 0,
+    });
+
+    const res = await handleResponse(() =>
+      deleteRole({
+        id: role.id,
+        params: {
+          restore: true,
+        },
+      })
+    );
+    message.destroy();
+    if (res.status) {
+      message.success("Role restored successfully!");
       return true;
     } else {
       message.error(res.message);
@@ -39,8 +89,26 @@ const RoleCard: React.FC<{ role: IRoles }> = ({ role }) => {
     },
     {
       label: "Delete",
-      onClick: () => onDelete(role.id),
+      onClick: () => onDelete(),
       key: 2,
+      icon: <Icon icon="mi:delete" className="text-xl" />,
+      danger: true,
+    },
+  ];
+  const items2: MenuProps["items"] = [
+    {
+      label: "Restore",
+      onClick: () => onRestore(),
+      key: 3,
+      icon: <Icon icon="ic:twotone-restore-page" className="text-xl " />,
+      style: {
+        color: "#319f7d",
+      },
+    },
+    {
+      label: "Delete Permanently",
+      onClick: () => onPermaDel(),
+      key: 4,
       icon: <Icon icon="mi:delete" className="text-xl" />,
       danger: true,
     },
@@ -122,7 +190,7 @@ const RoleCard: React.FC<{ role: IRoles }> = ({ role }) => {
         </div>
       </div>
 
-      <Dropdown menu={{ items }}>
+      <Dropdown menu={{ items: role?.deleted_at ? items2 : items }}>
         <a onClick={(e) => e.preventDefault()}>
           <Space>
             <IconButton>

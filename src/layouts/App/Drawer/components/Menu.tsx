@@ -283,9 +283,7 @@ const items: MenuItem[] = [
           getItem(
             "Trash",
             "/app/employees/trash",
-            <Icon icon={"radix-icons:dashboard"} />,
-            undefined,
-            true
+            <Icon icon={"radix-icons:dashboard"} />
           ),
         ]
       ),
@@ -331,9 +329,7 @@ const items: MenuItem[] = [
         getItem(
           "Trash",
           "/app/roles/trash",
-          <Icon icon={"radix-icons:dashboard"} />,
-          undefined,
-          true
+          <Icon icon={"radix-icons:dashboard"} />
         ),
       ]),
     ],
