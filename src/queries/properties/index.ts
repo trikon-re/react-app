@@ -36,3 +36,19 @@ export const useCreateProperty = () => {
     onSuccess: () => queryClient.invalidateQueries(["get-all-properties"]),
   });
 };
+
+const deleteProperty = ({ id, params }: { id: number; params?: any }) => {
+  return instance.delete(`/assets/${id}`, {
+    params,
+  });
+};
+
+export const useDeleteProperty = () => {
+  const query = useQueryClient();
+  return useMutation(deleteProperty, {
+    onSuccess: () => {
+      query.invalidateQueries(["get-all-properties"]);
+      query.invalidateQueries(["get-property-by-id"]);
+    },
+  });
+};
