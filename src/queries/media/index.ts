@@ -55,8 +55,10 @@ export const useUpdateMediaById = () => {
   });
 };
 
-const deleteMedia = (id: number) => {
-  return instance.delete(`/media/${id}`);
+const deleteMedia = ({ id, params }: { id: number; params?: any }) => {
+  return instance.delete(`/media/${id}`, {
+    params,
+  });
 };
 
 export const useDeleteMedia = () => {

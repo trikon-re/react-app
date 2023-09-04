@@ -93,13 +93,7 @@ const items: MenuItem[] = [
             ),
           ]
         ),
-        getItem(
-          "Trash",
-          "/leads/trash",
-          <Icon icon={"gg:trash"} />,
-          undefined,
-          true
-        ),
+        getItem("Trash", "/leads/trash", <Icon icon={"gg:trash"} />),
         getItem(
           "Reports",
           "/app/leads/reports",
@@ -162,13 +156,7 @@ const items: MenuItem[] = [
             ),
           ]
         ),
-        getItem(
-          "Trash",
-          "/properties/trash",
-          <Icon icon={"gg:trash"} />,
-          undefined,
-          true
-        ),
+        getItem("Trash", "/properties/trash", <Icon icon={"gg:trash"} />),
         getItem(
           "Reports",
           "/app/properties/reports",
@@ -219,9 +207,7 @@ const items: MenuItem[] = [
         getItem(
           "Trash",
           "/app/media/trash",
-          <Icon icon={"radix-icons:dashboard"} />,
-          undefined,
-          true
+          <Icon icon={"radix-icons:dashboard"} />
         ),
         getItem(
           "Reports",

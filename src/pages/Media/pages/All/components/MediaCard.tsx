@@ -1,3 +1,4 @@
+import useAreYouSure from "@/hooks/useAreYouSure";
 import { useDeleteMedia } from "@/queries/media";
 import handleResponse from "@/utilities/handleResponse";
 import { stringAvatar } from "@/utilities/stringAvatar";
@@ -16,15 +17,15 @@ import { Link, useNavigate } from "react-router-dom";
 
 const MediaCard: React.FC<{ media: IMedia }> = ({ media }) => {
   const navigate = useNavigate();
-  const { mutateAsync: deletemedia } = useDeleteMedia();
+  const { mutateAsync: deleteMedia } = useDeleteMedia();
 
-  const onDelete = async (fileName: number) => {
+  const onDelete = async () => {
     message.open({
       type: "loading",
       content: "Deleting Media..",
       duration: 0,
     });
-    const res = await handleResponse(() => deletemedia(media.id));
+    const res = await handleResponse(() => deleteMedia({ id: media.id }));
     message.destroy();
     if (res.status) {
       message.success("Media deleted successfully!");
@@ -34,6 +35,70 @@ const MediaCard: React.FC<{ media: IMedia }> = ({ media }) => {
       return false;
     }
   };
+
+  const onPermaDel = async () => {
+    message.open({
+      type: "loading",
+      content: "Permanently Deleting Media..",
+      duration: 0,
+    });
+
+    const res = await handleResponse(() =>
+      deleteMedia({
+        id: media.id,
+        params: {
+          permanent: true,
+        },
+      })
+    );
+    message.destroy();
+    if (res.status) {
+      message.success("Media deleted permanently!");
+      return true;
+    } else {
+      message.error(res.message);
+      return false;
+    }
+  };
+
+  const { contextHolder: permaDelContextHolder, open } = useAreYouSure({
+    title: "Delete Media Permanently?",
+    okText: "Delete",
+    cancelText: "Cancel",
+    color: "error",
+  });
+  const { contextHolder: delContextHolder, open: delOpen } = useAreYouSure({
+    title: "Delete Media?",
+    okText: "Delete",
+    cancelText: "Cancel",
+    color: "error",
+  });
+
+  const onRestore = async () => {
+    message.open({
+      type: "loading",
+      content: "Restoring Media..",
+      duration: 0,
+    });
+
+    const res = await handleResponse(() =>
+      deleteMedia({
+        id: media.id,
+        params: {
+          restore: true,
+        },
+      })
+    );
+    message.destroy();
+    if (res.status) {
+      message.success("Media restored successfully!");
+      return true;
+    } else {
+      message.error(res.message);
+      return false;
+    }
+  };
+
   const items: MenuProps["items"] = [
     {
       label: "View details",
@@ -43,14 +108,55 @@ const MediaCard: React.FC<{ media: IMedia }> = ({ media }) => {
     },
     {
       label: "Delete",
-      onClick: () => onDelete(media.id),
+      onClick: () =>
+        delOpen(
+          () => onDelete(),
+          <>
+            You are deleting a media.
+            <br />
+            <br />
+            Deleting a media means the media will move to trash folder. After
+            deleting, this work can't be undone. You'll have to restore the
+            media to use again
+          </>
+        ),
       key: 2,
+      icon: <Icon icon="mi:delete" className="text-xl" />,
+      danger: true,
+    },
+  ];
+  const items2: MenuProps["items"] = [
+    {
+      label: "Restore",
+      onClick: () => onRestore(),
+      key: 3,
+      icon: <Icon icon="ic:twotone-restore-page" className="text-xl " />,
+      style: {
+        color: "#319f7d",
+      },
+    },
+    {
+      label: "Delete Permanently",
+      onClick: () =>
+        open(
+          () => onPermaDel(),
+          <>
+            You are deleting a media permanently.
+            <br />
+            <br />
+            Deleting a media permanently means the media won't be available in
+            app any more. After deleting, this work can't be undone.
+          </>
+        ),
+      key: 4,
       icon: <Icon icon="mi:delete" className="text-xl" />,
       danger: true,
     },
   ];
   return (
     <>
+      {delContextHolder}
+      {permaDelContextHolder}
       <ListItemButton
         className="hover:bg-[#F6FAFD] rounded-lg py-1 px-2 my-1 overflow-hidden items-start md:items-center gap-4"
         disableRipple
@@ -105,7 +211,7 @@ const MediaCard: React.FC<{ media: IMedia }> = ({ media }) => {
           }}
           key={media?.id}
         />
-        <Dropdown menu={{ items }}>
+        <Dropdown menu={{ items: media?.deleted_at ? items2 : items }}>
           <a onClick={(e) => e.preventDefault()}>
             <Space>
               <IconButton>
