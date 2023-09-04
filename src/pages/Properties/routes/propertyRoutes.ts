@@ -7,6 +7,10 @@ export const propertyRoutes = [
     Component: lazy(() => import("../pages/All")),
   },
   {
+    path: PROPERTY_ROUTES.TRASH,
+    Component: lazy(() => import("../pages/Trash")),
+  },
+  {
     path: PROPERTY_ROUTES.NOTFOUND,
     Component: lazy(() => import("@pages/NotFound")),
   },
