@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useDeleteRole } from "@/queries/roles";
 import handleResponse from "@/utilities/handleResponse";
 import { message } from "@components/antd/message";
+import useAreYouSure from "@/hooks/useAreYouSure";
 
 const RoleCard: React.FC<{ role: IRoles }> = ({ role }) => {
   const navigate = useNavigate();
@@ -55,6 +56,20 @@ const RoleCard: React.FC<{ role: IRoles }> = ({ role }) => {
       return false;
     }
   };
+
+  const { contextHolder: permaDelContextHolder, open } = useAreYouSure({
+    title: "Delete Role Permanently?",
+    okText: "Delete",
+    cancelText: "Cancel",
+    color: "error",
+  });
+  const { contextHolder: delContextHolder, open: delOpen } = useAreYouSure({
+    title: "Delete Role?",
+    okText: "Delete",
+    cancelText: "Cancel",
+    color: "error",
+  });
+
   const onRestore = async () => {
     message.open({
       type: "loading",
@@ -89,7 +104,18 @@ const RoleCard: React.FC<{ role: IRoles }> = ({ role }) => {
     },
     {
       label: "Delete",
-      onClick: () => onDelete(),
+      onClick: () =>
+        delOpen(
+          () => onDelete(),
+          <>
+            You are deleting a role.
+            <br />
+            <br />
+            Deleting a role means the role will move to trash folder. After
+            deleting, this work can't be undone. You'll have to restore the role
+            to use again
+          </>
+        ),
       key: 2,
       icon: <Icon icon="mi:delete" className="text-xl" />,
       danger: true,
@@ -107,99 +133,115 @@ const RoleCard: React.FC<{ role: IRoles }> = ({ role }) => {
     },
     {
       label: "Delete Permanently",
-      onClick: () => onPermaDel(),
+      onClick: () =>
+        open(
+          () => onPermaDel(),
+          <>
+            You are deleting a role permanently.
+            <br />
+            <br />
+            Deleting a role permanently means the role won't be available in app
+            any more. After deleting, this work can't be undone.
+          </>
+        ),
       key: 4,
       icon: <Icon icon="mi:delete" className="text-xl" />,
       danger: true,
     },
   ];
   return (
-    <ListItemButton
-      className="hover:bg-slate-50 rounded-lg py-2  my-2 overflow-hidden md:items-center items-start gap-4"
-      disableRipple
-      disableTouchRipple
-    >
-      {/* <div className="flex flex-row flex-1 md:flex-row md:items-center items-start justify-between"> */}
-      <div className="grid md:grid-cols-3 grid-cols-1 justify-between items-center flex-1">
-        {/* Admin name */}
-        <ListItemText
-          primary={
-            <div className="flex flex-row gap-2 items-center ">
-              <p className="text-lg font-medium">{role?.name}</p>
-              <Tag color={`${role?.is_active ? "green" : "red"}`}>
-                {role?.is_active ? "active" : "inactive"}
-              </Tag>
-            </div>
-          }
-          secondary={
-            <>
-              {role?.prefix ? (
-                <p className="text-sm font-semibold text-text-light uppercase">
-                  @{role?.prefix}
+    <>
+      {delContextHolder}
+      {permaDelContextHolder}
+      <ListItemButton
+        className="hover:bg-slate-50 rounded-lg py-2  my-2 overflow-hidden md:items-center items-start gap-4"
+        disableRipple
+        disableTouchRipple
+      >
+        {/* <div className="flex flex-row flex-1 md:flex-row md:items-center items-start justify-between"> */}
+        <div className="grid md:grid-cols-3 grid-cols-1 justify-between items-center flex-1">
+          {/* Admin name */}
+          <ListItemText
+            primary={
+              <div className="flex flex-row gap-2 items-center ">
+                <p className="text-lg font-medium">{role?.name}</p>
+                <Tag color={`${role?.is_active ? "green" : "red"}`}>
+                  {role?.is_active ? "active" : "inactive"}
+                </Tag>
+              </div>
+            }
+            secondary={
+              <>
+                {role?.prefix ? (
+                  <p className="text-sm font-semibold text-text-light uppercase">
+                    @{role?.prefix}
+                  </p>
+                ) : (
+                  ""
+                )}
+                <p className="text-sm font-medium my-0.5">
+                  {role?.description}
                 </p>
-              ) : (
-                ""
-              )}
-              <p className="text-sm font-medium my-0.5">{role?.description}</p>
-            </>
-          }
-          className="p-0 m-0 grow-0 flex-0"
-          primaryTypographyProps={{
-            className: "text-xl font-medium",
-          }}
-          secondaryTypographyProps={{
-            variant: "caption",
-            className: "w-full",
-          }}
-          key={role?.id}
-        />
+              </>
+            }
+            className="p-0 m-0 grow-0 flex-0"
+            primaryTypographyProps={{
+              className: "text-xl font-medium",
+            }}
+            secondaryTypographyProps={{
+              variant: "caption",
+              className: "w-full",
+            }}
+            key={role?.id}
+          />
 
-        <div className="flex flex-row md:items-center  md:gap-4 gap-2 py-2 md:py-0 ">
-          {/* Assigned R0le list */}
-          <div className="flex flex-row  gap-2">
-            <Icon
-              icon="ic:twotone-person-pin"
-              className="text-xl text-text-light"
-            />
-            <p className="text-sm font-semibold text-text-light">
-              {`${role?.total_employees}`} Roles
-            </p>
+          <div className="flex flex-row md:items-center  md:gap-4 gap-2 py-2 md:py-0 ">
+            {/* Assigned R0le list */}
+            <div className="flex flex-row  gap-2">
+              <Icon
+                icon="ic:twotone-person-pin"
+                className="text-xl text-text-light"
+              />
+              <p className="text-sm font-semibold text-text-light">
+                {`${role?.total_employees}`} Roles
+              </p>
+            </div>
+
+            {/* Assigned permission list */}
+            <div className="flex flex-row gap-2">
+              <Icon
+                icon="fluent-mdl2:permissions"
+                className="text-md text-text-light"
+              />
+              <p className="text-sm font-semibold text-text-light">
+                {`${role?.total_permissions}`} Permissions
+              </p>
+            </div>
           </div>
 
-          {/* Assigned permission list */}
-          <div className="flex flex-row gap-2">
-            <Icon
-              icon="fluent-mdl2:permissions"
-              className="text-md text-text-light"
-            />
-            <p className="text-sm font-semibold text-text-light">
-              {`${role?.total_permissions}`} Permissions
+          {/* last update */}
+
+          <div className="flex flex-col md:items-end ">
+            <p className="text-sm font-medium md:text-right text-text-light">
+              Last updated
+            </p>
+            <p className="text-sm font-semibold md:text-right text-text-dark">
+              {moment(role?.updated_at).calendar()}
             </p>
           </div>
         </div>
 
-        {/* last update */}
-
-        <div className="flex flex-col md:items-end ">
-          <p className="text-sm font-medium md:text-right text-text-light">
-            Last updated
-          </p>
-          <p className="text-sm font-semibold md:text-right text-text-dark">
-            {moment(role?.updated_at).calendar()}
-          </p>
-        </div>
-      </div>
-
-      <Dropdown menu={{ items: role?.deleted_at ? items2 : items }}>
-        <a onClick={(e) => e.preventDefault()}>
-          <Space>
-            <IconButton>
-              <Icon icon="ph:dots-three-outline-vertical" />
-            </IconButton>
-          </Space>
-        </a>
-      </Dropdown>
-    </ListItemButton>
+        <Dropdown menu={{ items: role?.deleted_at ? items2 : items }}>
+          <a onClick={(e) => e.preventDefault()}>
+            <Space>
+              <IconButton>
+                <Icon icon="ph:dots-three-outline-vertical" />
+              </IconButton>
+            </Space>
+          </a>
+        </Dropdown>
+      </ListItemButton>
+    </>
   );
 };
 
