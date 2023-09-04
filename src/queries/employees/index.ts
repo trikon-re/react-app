@@ -55,8 +55,8 @@ export const useUpdateEmployeesById = () => {
   });
 };
 
-const deleteEmployee = (id: number) => {
-  return instance.delete(`/employees/${id}`);
+const deleteEmployee = ({ id, params }: { id: number; params?: any }) => {
+  return instance.delete(`/employees/${id}`, { params });
 };
 
 export const useDeleteEmployee = () => {

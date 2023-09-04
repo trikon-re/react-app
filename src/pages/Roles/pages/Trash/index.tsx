@@ -4,7 +4,7 @@ import React from "react";
 import { IRoles } from "@pages/Roles/types";
 import RoleCard from "../All/components/RoleCard";
 
-const Roles: React.FC = () => {
+const Trash: React.FC = () => {
   const { getQueryParams } = usePaginate();
   const { data } = useGetRoles({ ...getQueryParams(), trash: true });
   const [roles, setRoles] = React.useState<any>([]);
@@ -24,4 +24,4 @@ const Roles: React.FC = () => {
     </>
   );
 };
-export default Roles;
+export default Trash;
