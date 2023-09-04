@@ -18,6 +18,11 @@ export const leadRoutes = [
 	},
 
 	{
+		path: LEAD_ROUTES.TRASH,
+		Component: lazy(() => import("../pages/Trash")),
+	},
+
+	{
 		path: LEAD_ROUTES.NOTFOUND,
 		Component: lazy(() => import("@pages/NotFound")),
 	},

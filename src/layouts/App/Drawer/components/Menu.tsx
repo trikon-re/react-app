@@ -92,7 +92,12 @@ const items: MenuItem[] = [
 						// ),
 					]
 				),
-				getItem("Trash", "/leads/trash", <Icon icon={"gg:trash"} />, undefined),
+				getItem(
+					"Trash",
+					"/app/leads/trash",
+					<Icon icon={"gg:trash"} />,
+					undefined
+				),
 				getItem(
 					"Reports",
 					"/app/leads/reports",
@@ -168,7 +173,7 @@ const items: MenuItem[] = [
 			]),
 			getItem(
 				"Media",
-				"/media",
+				"/app/media",
 				<Icon icon={"material-symbols:person-play-outline"} />,
 				[
 					getItem(
