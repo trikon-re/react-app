@@ -7,4 +7,5 @@ export type IRoles = {
   prefix: string;
   total_employees: number;
   total_permissions: number;
+  deleted_at?: string;
 };

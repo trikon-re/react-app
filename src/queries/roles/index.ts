@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ICreateRole } from "./types";
 
 const getRoles = (params: any) => {
-  return instance.get(`/roles`);
+  return instance.get(`/roles`, { params });
 };
 
 export const useGetRoles = (params: any) => {
@@ -31,8 +31,10 @@ export const useGetgetRoleById = (id?: string) => {
   });
 };
 
-const deleteRole = (id: number) => {
-  return instance.delete(`/roles/${id}`);
+const deleteRole = ({ id, params }: { id: number; params?: any }) => {
+  return instance.delete(`/roles/${id}`, {
+    params,
+  });
 };
 
 export const useDeleteRole = () => {

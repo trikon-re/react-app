@@ -7,6 +7,10 @@ export const roleRoutes = [
     Component: lazy(() => import("../pages/All")),
   },
   {
+    path: ROLE_ROUTES.TRASH,
+    Component: lazy(() => import("../pages/Trash")),
+  },
+  {
     path: ROLE_ROUTES.NOTFOUND,
     Component: lazy(() => import("@pages/NotFound")),
   },
